@@ -1,0 +1,45 @@
+import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
+import { COLORS, FONTS, FONTSTYLES, images, SIZES } from '../../../constants'
+import React, { useEffect } from 'react'
+// import { FontAwesome5 } from '@expo/vector-icons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+// import { LocalSvg } from 'react-native-svg'
+import { notification } from '../../../assets'
+// import { useRouter } from 'expo-router'
+import useFetch from '../../../hook/useFetch'
+import Base from '../../../utils/base'
+// import { MaterialCommunityIcons } from '@expo/vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+export default function HeaderResume(props) {
+	var base = new Base()
+
+  return (
+    <View
+			style={{
+				flexDirection: "row",
+				backgroundColor: "white",
+				alignItems: "center",
+				paddingBottom: 16,
+			}}>
+			<View style={{ width: SIZES.xLarge, height: 2, backgroundColor: "rgba(0,0,0,0.1)" }} />
+			<Text style={styles.numBox}>{props.numText}</Text>
+			<Text style={[FONTSTYLES.sBold16_secondary, {marginLeft: SIZES.small, }, ]}>{props.title}</Text>
+			<View style={{ flex: 1, height: 2, backgroundColor: "rgba(0,0,0,0.1)" }} />
+		</View>
+  )
+}
+
+const styles = StyleSheet.create({
+	numBox: {
+		...FONTSTYLES.sBold16_secondary,
+		width: 35,
+		height: 35,
+		textAlign: "center",
+		textAlignVertical: "center",
+		borderRadius: 8,
+		borderWidth: 1,
+		borderColor: COLORS.gray,
+	},
+});

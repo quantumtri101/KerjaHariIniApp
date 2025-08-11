@@ -77,13 +77,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.testreactnative"
+    namespace "com.shelter.kerjahariini"
     defaultConfig {
-        applicationId "com.testreactnative"
+        applicationId "com.shelter.kerjahariini"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 18
+        versionName "0.0.0018"
     }
     signingConfigs {
         debug {
@@ -117,3 +117,8 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+project.ext.vectoricons = [
+		iconFontNames: [ 'MaterialIcons.ttf', 'FontAwesome5.ttf', 'MaterialCommunityIcons.ttf', 'Feather.ttf', ] // Specify font files
+]
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
