@@ -17,7 +17,7 @@ export default function PrivacyPolicy(props) {
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Syarat dan Ketentuan'} navigation={props.navigation}/>
       </View>
       <WebView

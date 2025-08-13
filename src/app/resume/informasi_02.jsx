@@ -227,7 +227,7 @@ export default function Informasi02(props) {
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={props.route.params.editResume ? 'Edit Resume' : 'Pengisian Resume'} navigation={props.navigation}/>
       </View>
 			<HeaderResume numText='2' title="Informasi Anda"/>

@@ -21,13 +21,17 @@ const Header = ({ withNotif, noInsets, title, backButton, onBackPress, rightIcon
   // useEffect(() => {
   // }, [getNotification.data])
   return (
-    <View style={[styles.mainContainer, { marginTop: noInsets ? SIZES.xSmall : insets.top }, style,]}>
+    <View style={[
+      styles.mainContainer, 
+      // { marginTop: noInsets ? SIZES.xSmall : insets.top },
+      style,
+    ]}>
       {backButton &&
         <View style={styles.backButton}>
           <TouchableNativeFeedback onPress={() => onBackPress != null ? onBackPress() : navigation.goBack()} style={{}}>
-            <View style={styles.backButton}>
+            {/* <View style={styles.backButton}> */}
               <MaterialCommunityIcons name={'chevron-left'} size={16} style={{ color: COLORS.black_12, }}/>
-            </View>
+            {/* </View> */}
           </TouchableNativeFeedback>
         </View>
       }
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'flex-start',
     backgroundColor: COLORS.white,
     paddingHorizontal: SIZES.xLarge,
-    paddingBottom: SIZES.small
+    paddingBottom: SIZES.small,
   },
   titleMain: {
     // flex: 1,
@@ -102,18 +106,19 @@ const styles = StyleSheet.create({
   backButton: {
     backgroundColor: 'white',
     elevation: 10,
+    padding: 8,
     shadowColor: '#00000080',
-    // shadowOpacity: 0.05,
+    shadowOpacity: .2,
     shadowOffset: {
-      width: 1,
-      height: 0
+      width: .5,
+      height: 0,
     },
     shadowRadius: 10,
     borderRadius: 18,
-    height: 37,
-    width: 37,
+    // height: 37,
+    // width: 37,
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden'
+    // overflow: 'hidden'
   }
 })

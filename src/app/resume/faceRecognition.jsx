@@ -40,7 +40,7 @@ export default function FaceRecognition(props) {
 					header: () => null
 				}}
 			/> */}
-			<View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+			<View style={{ backgroundColor: 'white' }}>
 				<Header backButton title={'Pengisian Resume'} navigation={props.navigation}/>
 			</View>
 			<HeaderResume numText='6' title="Selfie KTP"/>

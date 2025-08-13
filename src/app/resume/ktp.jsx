@@ -34,7 +34,7 @@ export default function KTP(props) {
 					header: () => null
 				}}
 			/> */}
-			<View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+			<View style={{ backgroundColor: 'white' }}>
 				<Header backButton title={'Pengisian Resume'} navigation={props.navigation}/>
 			</View>
 			<HeaderResume numText='5' title="KTP"/>

@@ -41,7 +41,7 @@ export default function ChangePassProfile(props) {
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Ganti Password'} navigation={props.navigation}/>
       </View>
       <ScrollView style={{ backgroundColor: 'white', paddingHorizontal: SIZES.xLarge }}>

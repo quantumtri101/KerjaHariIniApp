@@ -161,7 +161,7 @@ export default function JobDetail(props) {
           }
           style={{ backgroundColor: "white", position: "relative" }}>
 
-          <View style={{ paddingVertical: SIZES.medium }}>
+          <View style={{ }}>
             <Header backButton title={getJobs.data.data?.company.name} navigation={props.navigation}/>
           </View>
 

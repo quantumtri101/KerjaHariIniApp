@@ -45,7 +45,7 @@ export default function PayoutReview(props){
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Request Penarikan'} navigation={props.navigation}/>
       </View>
       <View style={styles.mainContainer}>

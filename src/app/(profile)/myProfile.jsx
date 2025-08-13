@@ -92,7 +92,7 @@ export default function MyProfile(props) {
           header: () => null,
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: "white" }}>
+      <View style={{ backgroundColor: "white" }}>
         <Header backButton title={"Profil"} navigation={props.navigation}/>
       </View>
       {getProfile.isLoading ? (

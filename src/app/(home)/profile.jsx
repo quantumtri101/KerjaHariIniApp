@@ -99,7 +99,7 @@ export default function Profile(props) {
   }
 
   return (
-    <View style={[styles.mainContainer, { marginTop: useSafeAreaInsets().top }]}>
+    <View style={[styles.mainContainer, {  }]}>
       <Header noInsets withNotif title={"Profile"} navigation={props.navigation}/>
       <ScrollView style={{}}>
         <View style={styles.profileContainer}>
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     paddingTop: SIZES.medium / 2,
     paddingBottom: 42,
     borderRadius: SIZES.xSmall,
-    backgroundColor: COLORS.lightWhite2,
+    backgroundColor: COLORS.white,
   },
   menuItemContainer: {
     height: SIZES.medium * 3.5,

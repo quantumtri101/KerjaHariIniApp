@@ -132,7 +132,7 @@ export default function InfoPekerjaan(props) {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    // backgroundColor: COLORS.lightWhite,
+    backgroundColor: COLORS.white,
     paddingHorizontal: SIZES.medium,
     paddingVertical: SIZES.large
   },

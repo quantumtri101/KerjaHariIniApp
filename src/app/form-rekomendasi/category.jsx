@@ -79,7 +79,7 @@ export default function FormRekomendasiCategory(props) {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={{ paddingVertical: SIZES.medium }}>
+      <View style={{ }}>
         <Header backButton title={" "} navigation={props.navigation}/>
       </View>
       <Text style={[FONTSTYLES.h1, { paddingHorizontal: SIZES.xLarge }]}>

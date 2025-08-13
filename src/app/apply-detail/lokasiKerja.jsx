@@ -24,7 +24,7 @@ export default function LokasiKerja(props) {
       /> */}
       <View style={{ flex: 1, backgroundColor: 'white', }}>
 
-				<View style={{ paddingVertical: SIZES.medium, zIndex: 9999, backgroundColor: 'white', }}>
+				<View style={{ zIndex: 9999, backgroundColor: 'white', }}>
           <Header backButton title={'Detail Lamaran'} navigation={props.navigation}/>
         </View>
 

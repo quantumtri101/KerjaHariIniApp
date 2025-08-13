@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     // ...FONTSTYLES.TextField,
     paddingHorizontal: SIZES.small,
-    paddingVertical: SIZES.xsmall,
+    paddingVertical: Platform.OS == 'ios' ? SIZES.xSmall : 0,
     borderWidth: 1,
     borderRadius: SIZES.medium / 2,
     borderColor: COLORS.gray,

@@ -14,7 +14,7 @@ export default function VerifikasiPenerimaan(props) {
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Verifikasi Penerimaan'} navigation={props.navigation}/>
       </View>
       <View style={styles.mainContainer}>

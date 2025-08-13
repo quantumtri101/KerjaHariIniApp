@@ -56,7 +56,7 @@ export default function EarningIndex(props) {
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton navigation={props.navigation} title={'Akumulasi Gaji'} />
       </View>
 

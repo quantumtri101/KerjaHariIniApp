@@ -57,7 +57,7 @@ export default function ApplyReview(props) {
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Review Lamaran'} navigation={props.navigation}/>
       </View>
       {/* <View style={{backgroundColor: 'white', width: '100%'}}>

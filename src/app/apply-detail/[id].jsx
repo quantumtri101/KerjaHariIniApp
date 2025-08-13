@@ -131,7 +131,7 @@ export default function ApplyDetailIndex(props) {
           }}
         /> */}
 
-        <View style={{ paddingVertical: SIZES.medium }}>
+        <View style={{ }}>
           <Header backButton title={"Detail Lamaran"} navigation={props.navigation}/>
         </View>
 
@@ -248,7 +248,7 @@ export default function ApplyDetailIndex(props) {
 
 					{
 						getJobs.data.data != null && getApplication.data.data != null &&
-						<View style={{ flex:1, marginHorizontal: -SIZES.medium }}>
+						<View style={{ flex:1, marginHorizontal: -SIZES.medium, }}>
 							<Tab.Navigator
 								tabBar={(props1) => <CustomTopTabBar {...props1} fill arrAllowedTab={arrAllowedTab} />}
 								sceneContainerStyle={{ backgroundColor: "white" }}

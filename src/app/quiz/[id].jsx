@@ -113,7 +113,7 @@ export default function QuizIndex(props) {
           header: () => null
         }}
       /> */}
-      <View style={{ paddingVertical: SIZES.medium, backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'General Quiz'} navigation={props.navigation}/>
       </View>
       {

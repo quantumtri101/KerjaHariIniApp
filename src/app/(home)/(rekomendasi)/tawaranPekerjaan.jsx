@@ -31,7 +31,7 @@ export default function TawaranPekerjaan(props) {
   }, [getRecommendation.data]);
 
   return (
-    <View style={{ flex: 1, }}>
+    <View style={{ flex: 1, backgroundColor: 'white', }}>
       {
         arrJobs.length == 0 ?
         <Text style={[styles.empty, {marginHorizontal: 0, marginTop: 16, }]}>Belum ada tawaran pekerjaan untuk anda saat ini</Text>

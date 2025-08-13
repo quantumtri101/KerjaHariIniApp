@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {AsyncStorage, BackHandler, DeviceEventEmitter} from 'react-native';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import { SafeAreaProvider, SafeAreaView, } from 'react-native-safe-area-context';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 // import RNCallKeep from 'react-native-callkeep';
@@ -34,6 +35,8 @@ export default class App extends Base {
 
 	render(){
 		return (
+			<SafeAreaView style={{ flex: 1, backgroundColor: 'white', }}>
+			<SafeAreaProvider>
 			<NavigationContainer>
 				<Stack.Navigator
 					screenOptions={{
@@ -121,6 +124,8 @@ export default class App extends Base {
 
 				</Stack.Navigator>
 			</NavigationContainer>
+			</SafeAreaProvider>
+			</SafeAreaView>
 		)
 	}
 }

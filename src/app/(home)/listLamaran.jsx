@@ -144,7 +144,7 @@ export default function ListLamaran(props) {
 
   return (
     <View
-      style={[styles.mainContainer, { marginTop: useSafeAreaInsets().top }]}
+      style={[styles.mainContainer, {  }]}
     >
       <Header noInsets withNotif title={"List Lamaran"} navigation={props.navigation}/>
 			{
