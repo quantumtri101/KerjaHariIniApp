@@ -77,13 +77,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.shelter.kerjahariini"
+    namespace "com.kerja.hariini"
     defaultConfig {
-        applicationId "com.shelter.kerjahariini"
+        applicationId "com.kerja.hariini"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 18
-        versionName "0.0.0018"
+        versionCode 21
+        versionName "0.0.0021"
     }
     signingConfigs {
         debug {
