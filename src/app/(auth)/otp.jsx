@@ -69,7 +69,9 @@ export default function OTPScreen(props) {
 		// 	console.log(phoneNumber)
 			// const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
 			// setConfirm(confirmation);
-			sendOTP.setRefetch()
+			sendOTP.setRefetch({
+				phone: phoneNumber,
+			})
 			setCodeSent(true);
 			
 			setAuthStateLoading(false);
@@ -146,8 +148,6 @@ export default function OTPScreen(props) {
 			setPrev(props.route.params.prev)
 		AsyncStorage.setItem('lastAuthPage', 'OTPScreen')
 
-		sendVerification()
-
 		return () => {
 			AsyncStorage.removeItem('lastAuthPage')
 		}
@@ -156,10 +156,10 @@ export default function OTPScreen(props) {
 		// return subscriber;
 	}, []);
 
-	// useEffect(() => {
-	// 	if(phoneNumber != '')
-	// 		sendVerification()
-	// }, [phoneNumber, ])
+	useEffect(() => {
+		if(phoneNumber != '')
+			sendVerification()
+	}, [phoneNumber, ])
 
 	useEffect(() => {
 		if(getProfile.data.status != null){

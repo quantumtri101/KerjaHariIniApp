@@ -22,11 +22,12 @@ export default function CameraScreen(props) {
   // const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);
   // const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [flashMode, setFlashMode] = useState(false);
+  const [cameraActive, setCameraActive] = useState(true);
 	const [imageBase64, setImageBase64] = useState('');
   const [capturedPhoto, setCapturedPhoto] = useState(null);
   const cameraRef = useRef()
 
-  useEffect(async () => {
+  useEffect(() => {
     // (async () => {
     //   const { status } = await Camera.requestCameraPermissionsAsync();
     //   setHasCameraPermission(status);
@@ -39,21 +40,28 @@ export default function CameraScreen(props) {
     // })();
 
 
-		const status = await Camera.getCameraPermissionStatus();
-		if(status != 'authorized'){
-			const permission = await Camera.requestCameraPermission();
-		}
+		initPermission()
+    setCameraActive(true)
 
 		// if(props.route.params.reviewResume)
 		// 	AsyncStorage.setItem('lastResumePage', 'KTPCamera')
   }, []);
 
+  async function initPermission(){
+    const status = await Camera.getCameraPermissionStatus();
+		if(status != 'authorized'){
+			const permission = await Camera.requestCameraPermission();
+		}
+  }
+
   const handleCapture = async () => {
+    
     if (cameraRef.current) {
       const file = await cameraRef.current.takePhoto({
-				flash: flashMode,
+				flash: flashMode ? 'on' : 'off',
 			});
 			// const response = await RNFS.readFile(`file://${file.path}`, 'base64')
+      
       setCapturedPhoto(file);
 			// setImageBase64(await base.toDataURLPromise('file://' + file.path))
     }
@@ -70,10 +78,12 @@ export default function CameraScreen(props) {
       if(props.route.params.reviewResume)
         await AsyncStorage.setItem("id_image", 'file://' + capturedPhoto.path)
       props.navigation.navigate('Resume', {screen : 'FaceRecognition', params: {editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, id_image: 'file://' + capturedPhoto.path, onGoBack: () => onGoBack(), }, })
+      setCameraActive(false)
     }
     else{
       await AsyncStorage.setItem("id_image", 'file://' + capturedPhoto.path)
       props.navigation.navigate('Resume', {screen : 'FaceRecognition', params: {}, })
+      setCameraActive(false)
     }
   }
 
@@ -127,7 +137,7 @@ export default function CameraScreen(props) {
 							isActive={true}
 							ref={cameraRef}/>
 
-						<View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', width: width, justifyContent: 'space-between', padding: SIZES.xxLarge, alignItems: 'center' }}>
+						<View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', width: width, justifyContent: 'space-between', padding: SIZES.xxLarge, alignItems: 'center', zIndex: 10, }}>
 							<View style={{ height: 60, width: 60, overflow: 'hidden', alignItems: 'center', justifyContent: 'center', borderRadius: 8, opacity: 0 }}>
 								<TouchableOpacity onPress={() => { }}>
 									<Image source={image.headerLogo} resizeMode='center' />

@@ -77,7 +77,7 @@ export default function Informasi01(props) {
 	};
 
 	const checkKota = () => {
-		var flag = kota == ""
+		var flag = kota == null || kota == ""
 		setKotaError(flag);
 		return flag;
 	};
@@ -100,16 +100,18 @@ export default function Informasi01(props) {
 				phone: noHP,
 				birth_date: date,
 				address: alamat,
-				city: autoCompleteSelectedItem,
+				city: kota,
 			};
 
 			if (props.route.params.reviewResume) {
 				await AsyncStorage.setItem("informasi_01", JSON.stringify(data));
 				props.route.params.onRefresh()
 				props.navigation.goBack()
-			} else if (props.route.params.editResume) {
+			} 
+			else if (props.route.params.editResume) {
 				postResume.fetchData();
-			} else {
+			} 
+			else {
 				await AsyncStorage.setItem("informasi_01", JSON.stringify(data));
 				props.navigation.navigate('Resume', {screen : 'Informasi02', params: {}, })
 			}
@@ -146,8 +148,10 @@ export default function Informasi01(props) {
 			setNoHP(props.route.params.resumeData.phone)
 			setDate(moment(props.route.params.resumeData.birth_date))
 			setAlamat(props.route.params.resumeData.name)
-			setKota(props.route.params.resumeData.city.id)
-			setAutoCompleteSelectedItem(props.route.params.resumeData.city)
+			if(props.route.params.resumeData.city != null){
+				setKota(props.route.params.resumeData.city.id)
+				setAutoCompleteSelectedItem(props.route.params.resumeData.city)
+			}
 		}
 	}, []);
 

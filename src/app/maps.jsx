@@ -40,7 +40,7 @@ export default function Maps(props) {
     longitude: location.longitude,
   }, false)
 
-  useEffect(async () => {
+  useEffect(() => {
 		setTargetLocation({
 			latitude: parseFloat(props.route.params.params.companyLat),
 			longitude: parseFloat(props.route.params.params.companyLong),

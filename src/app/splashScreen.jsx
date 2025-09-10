@@ -106,7 +106,7 @@ export default function SplashScreen(props) {
 			}
 
 			if (tempToken != null || (userData.id != null && userData.phone_verified_at == null))
-				props.navigation.replace('Auth', {screen : 'OTPScreen', params: {prev: 'login', }, })
+				props.navigation.replace('Auth', {screen : 'OTPScreen', params: {prev: 'login', phone: userData.phone, }, })
 			else if (token == null)
 				props.navigation.replace('Auth', {screen : 'Login', })
 			else if (arrNextPage.length > 0)

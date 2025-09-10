@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform, } from 'react-native'
 import { COLORS, FONTS, FONTSTYLES, images, SIZES } from '../../../constants'
 import React, { useEffect } from 'react'
 // import { FontAwesome5 } from '@expo/vector-icons'
@@ -23,17 +23,17 @@ const Header = ({ withNotif, noInsets, title, backButton, onBackPress, rightIcon
   return (
     <View style={[
       styles.mainContainer, 
-      // { marginTop: noInsets ? SIZES.xSmall : insets.top },
+      { paddingTop: Platform.OS == 'ios' ? 0 : SIZES.xSmall, },
       style,
     ]}>
       {backButton &&
-        <View style={styles.backButton}>
-          <TouchableNativeFeedback onPress={() => onBackPress != null ? onBackPress() : navigation.goBack()} style={{}}>
+        <TouchableNativeFeedback onPress={() => onBackPress != null ? onBackPress() : navigation.goBack()} style={{}}>
+          <View style={styles.backButton}>
             {/* <View style={styles.backButton}> */}
               <MaterialCommunityIcons name={'chevron-left'} size={16} style={{ color: COLORS.black_12, }}/>
             {/* </View> */}
-          </TouchableNativeFeedback>
-        </View>
+          </View>
+        </TouchableNativeFeedback>
       }
 			<View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', }}>
       	{

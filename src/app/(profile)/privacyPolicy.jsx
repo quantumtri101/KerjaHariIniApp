@@ -18,7 +18,7 @@ export default function PrivacyPolicy(props) {
         }}
       /> */}
       <View style={{ backgroundColor: 'white' }}>
-        <Header backButton title={'Syarat dan Ketentuan'} navigation={props.navigation}/>
+        <Header backButton title={'Privacy Policy'} navigation={props.navigation}/>
       </View>
       <WebView
         // originWhitelist={['*']}

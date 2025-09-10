@@ -28,15 +28,8 @@ export default function QuizIndex(props) {
 	const [timerMoment, setTimerMoment] = useState(moment.duration());
 	const [nowMoment, setNowMoment] = useState(moment());
 
-	useEffect(async () => {
-		await AsyncStorage.setItem('lastQuizPage', 'Quiz')
-		setTimer(props.route.params.timerSeconds - 1)
-		setTimerMoment(moment.duration(props.route.params.timerSeconds, 's'))
-
-		var arr = await AsyncStorage.getItem('arr_quiz')
-		arr = arr != null ? JSON.parse(arr) : []
-		if(arr[props.route.params.id] != null)
-			setAnswer(arr[props.route.params.id])
+	useEffect(() => {
+		initData()
 	}, [])
 
   useEffect(() => {
@@ -67,6 +60,17 @@ export default function QuizIndex(props) {
 			setTimer(timer - 1)
 		}, 1000)
 	}, [timer])
+
+  async function initData(){
+    await AsyncStorage.setItem('lastQuizPage', 'Quiz')
+		setTimer(props.route.params.timerSeconds - 1)
+		setTimerMoment(moment.duration(props.route.params.timerSeconds, 's'))
+
+		var arr = await AsyncStorage.getItem('arr_quiz')
+		arr = arr != null ? JSON.parse(arr) : []
+		if(arr[props.route.params.id] != null)
+			setAnswer(arr[props.route.params.id])
+  }
 
   const submitAnswer = async () => {
     var arr = await AsyncStorage.getItem('arr_quiz')

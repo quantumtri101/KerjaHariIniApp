@@ -10,7 +10,7 @@ export default function LokasiKerja(props) {
   const [location, setLocation] = useState(null)
   // const [hasLocationPermission, setHasLocationPermission] = useState(null)
 
-  useEffect(async () => {
+  useEffect(() => {
     // const locationPermission = await Location.requestForegroundPermissionsAsync()
 		// setHasLocationPermission(locationPermission === 'granted')
   },[])

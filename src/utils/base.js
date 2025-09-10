@@ -97,6 +97,7 @@ export default class Base extends Component {
 			}
 
 			try{
+
 				var response
 				if(method === 'get'){
 					for(let x in data)

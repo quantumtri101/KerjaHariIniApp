@@ -67,10 +67,14 @@ export default function RegisterScreen(props) {
 		false
 	);
 
-	useEffect(async () => {
+	useEffect(() => {
+		initToken()
+	}, [])
+
+	async function initToken(){
 		const token = await messaging().getToken();
 		setFcmToken(token);
-	}, [])
+	}
 
 	const handleOption = (v) => {
 		setGender(v == "Pria" ? 1 : 0);

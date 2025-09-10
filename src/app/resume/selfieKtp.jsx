@@ -28,6 +28,7 @@ export default function SelfieKTP(props) {
   // const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);
   // const [cameraType, setCameraType] = useState(Camera.Constants.Type.front);
   const [flashMode, setFlashMode] = useState(false);
+  const [cameraActive, setCameraActive] = useState(true);
 	const [isModal, setIsModal] = useState(false);
 	const [imageBase64, setImageBase64] = useState('');
   const [capturedPhoto, setCapturedPhoto] = useState(null);
@@ -38,8 +39,9 @@ export default function SelfieKTP(props) {
 	const getResume = useFetch("GET", "resume", {});
 	const postResume = useFetch("POST", "resume/edit", {}, false);
 
-  useEffect(async () => {
-		await Camera.requestCameraPermission();
+  useEffect(() => {
+    initPermission()
+    setCameraActive(true)
   }, []);
 
 	useEffect(() => {
@@ -57,17 +59,26 @@ export default function SelfieKTP(props) {
 		setIsModal(false)
 		if(postResume.data.status != null){
 			if(postResume.data.status == "success"){
-				props.routes.params.onGoBack()
+        props.navigation.goBack()
+				props.route.params.onGoBack()
+        setCameraActive(false)
 			}
 			else
 				base.alertSnackbar(postResume.data.message)
 		}
 	}, [postResume.data]);
 
+  async function initPermission(){
+    const status = await Camera.getCameraPermissionStatus();
+    if(status != 'authorized'){
+      const permission = await Camera.requestCameraPermission();
+    }
+  }
+
   const handleCapture = async () => {
     if (cameraRef.current) {
       const file = await cameraRef.current.takePhoto({
-				flash: flashMode,
+				flash: flashMode ? 'on' : 'off',
 			});
 			setCapturedPhoto(file);
     }
@@ -78,6 +89,7 @@ export default function SelfieKTP(props) {
       await AsyncStorage.setItem("selfie_image", 'file://' + capturedPhoto.path)
       props.navigation.goBack()
       props.route.params.onGoBack()
+      setCameraActive(false)
 			// props.navigation.navigate('Resume', {screen : 'Review', params: {id_image: props.route.params.id_image, selfie_image: 'file://' + capturedPhoto.path,}, })
     }
 		else if(props.route.params.editResume){
@@ -85,12 +97,12 @@ export default function SelfieKTP(props) {
 			var obj = JSON.parse(JSON.stringify(resumeData))
 			obj.id_image = await base.toDataURLPromise(props.route.params.id_image)
 			obj.selfie_image = await base.toDataURLPromise('file://' + capturedPhoto.path)
-			obj.marital_status = null
 			postResume.setRefetch(obj)
 		}
     else{
       await AsyncStorage.setItem("selfie_image", 'file://' + capturedPhoto.path)
 			props.navigation.navigate('Resume', {screen : 'Review', params: {}, })
+      setCameraActive(false)
     }
   }
 

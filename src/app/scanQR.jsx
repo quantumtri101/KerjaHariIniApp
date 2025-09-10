@@ -59,8 +59,8 @@ export default function ScanQR(props) {
 		}
 	})
 
-  useEffect(async () => {
-		await Camera.requestCameraPermission();
+  useEffect(() => {
+		initPermission()
   }, []);
 
 	useEffect(() => {
@@ -80,6 +80,13 @@ export default function ScanQR(props) {
     }
     setIsCameraActive(true)
 	}, [getJobs.data,])
+
+  async function initPermission(){
+    const status = await Camera.getCameraPermissionStatus();
+    if(status != 'authorized'){
+      const permission = await Camera.requestCameraPermission();
+    }
+  }
 
 	function onModalSubmit(){
 		setModalVisible(false)

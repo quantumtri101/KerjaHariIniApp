@@ -1,10 +1,12 @@
-import { Text, StyleSheet, View, TextInput, TouchableOpacity, Pressable, TouchableNativeFeedback } from 'react-native'
+import { Text, StyleSheet, View, TextInput, TouchableOpacity, Pressable, TouchableNativeFeedback, Modal } from 'react-native'
 import React, { Component, forwardRef, useEffect, useRef, useState } from 'react'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
 // import Icon from '@expo/vector-icons/MaterialIcons'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Picker } from '@react-native-picker/picker'
 import { color } from 'react-native-reanimated'
+
+import PickerModal from './PickerModal';
 
 // export default class TextField extends Component {
 const TextField = forwardRef(({
@@ -38,6 +40,7 @@ const TextField = forwardRef(({
 
 
   const [focus, setFocus] = useState(false)
+  const [showPicker, setShowPicker] = useState(false)
   // const [value, setValue] = useState('')
   const [visibility, setVisibility] = useState(false)
   const [pickerState, setPickerState] = useState(preSelected == null ? null : preSelected)
@@ -59,8 +62,9 @@ const TextField = forwardRef(({
 	}, [pickerState, pickerData, ])
 
   function open() {
-    pickerRef.current.focus();
+    // pickerRef.current.focus();
     setFocus(true)
+    setShowPicker(true)
   }
 
   function onPickerValueChange(itemValue) {
@@ -73,6 +77,12 @@ const TextField = forwardRef(({
 
   function close() {
     pickerRef.current.blur();
+  }
+
+  function onOptionClicked(selected){
+    setPickerState(selected.id)
+    setPickerStateLabel(selected.name)
+    setShowPicker(false)
   }
 
   const blur = () => {
@@ -108,19 +118,26 @@ const TextField = forwardRef(({
           <TouchableNativeFeedback onPress={open}>
             <Text style={[styles.pickerText, { color: pickerState == null ?  COLORS.gray : 'black' }]}>{pickerStateLabel == null || pickerStateLabel == 0 ? placeholder : pickerStateLabel}</Text>
           </TouchableNativeFeedback>
-          <Picker
+          <PickerModal
+            isModal={showPicker}
+            title={label}
+            value={{ id: pickerState, name: pickerStateLabel, }}
+            arr_option={pickerData}
+            onModalClosed={() => setShowPicker(false)}
+            onOptionClicked={(selected) => onOptionClicked(selected)}/>
+          {/* <Picker
             ref={pickerRef}
             selectedValue={pickerState}
             onValueChange={(itemValue) => onPickerValueChange(itemValue)}
             onBlur={() => setFocus(false)}
-            enabled={editable}
-            style={{ display: 'none' }}
-          >
+            mode='dropdown'
+            enabled={editable}>
             <Picker.Item label={`-` + placeholder + `-`} enabled={false} />
             {pickerData?.map((item, index) => (
               <Picker.Item label={item.name} value={item.id} key={index} />
             ))}
-          </Picker>
+          </Picker> */}
+          
         </View>
         :
         <View style={[
@@ -235,7 +252,8 @@ const styles = StyleSheet.create({
   pickerText: {
     // ...FONTSTYLES.TextField,
     // fontSize: SIZES.medium,
-    flex: 1, paddingHorizontal: SIZES.medium, paddingVertical: SIZES.small,
+    flex: 1, paddingHorizontal: SIZES.medium, 
+    paddingVertical: SIZES.small,
     color: COLORS.gray
   }
 

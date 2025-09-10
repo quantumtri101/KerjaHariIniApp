@@ -34,7 +34,7 @@ export default function ResumeSkill(props) {
 	const postResume = useFetch("POST", "resume/edit", postResumeQuery, false);
 
 	const [title, setTitle] = useState("");
-	const [isModal, setIsModal] = useState(true);
+	const [isModal, setIsModal] = useState(false);
 	const [fromSystem, setFromSystem] = useState(false);
 	const [arr, setArr] = useState([]);
 	const [resumeData, setResumeData] = useState({});
@@ -120,7 +120,7 @@ export default function ResumeSkill(props) {
 				arr1.push(skill);
 		}
 
-		if(arr.length == 0)
+		if(arr1.length == 0)
 			base.alertSnackbar('Skill is Empty')
 		else{
 			

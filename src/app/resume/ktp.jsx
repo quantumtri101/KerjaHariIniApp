@@ -21,10 +21,10 @@ export default function KTP(props) {
 	}
 
 	function onNextAction(){
-		if(props.route.params.reviewResume)
+		// if(props.route.params.reviewResume)
 			props.navigation.navigate('Resume', {screen : 'KtpCamera', params: {editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, onGoBack: () => onGoBack(), }, })
-		else
-			props.navigation.navigate('Resume', {screen : 'KtpCamera', params: {}, })
+		// else
+		// 	props.navigation.navigate('Resume', {screen : 'KtpCamera', params: { editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, onGoBack: () => onGoBack(), }, })
 	}
 
 	return (

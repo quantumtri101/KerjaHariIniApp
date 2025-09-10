@@ -17,7 +17,7 @@ export default function FaceRecognition(props) {
 	// }
 
 	useEffect(() => {
-		if(props.route.params.reviewResume == null)
+		if(props.route.params.reviewResume == null && props.route.params.editResume == null)
 			AsyncStorage.setItem('lastResumePage', 'FaceRecognition')
 	}, [])
 
@@ -27,10 +27,10 @@ export default function FaceRecognition(props) {
 	}
 
 	function onNextClicked(){
-		if(props.route.params.reviewResume)
+		// if(props.route.params.reviewResume)
 			props.navigation.navigate('Resume', {screen : 'SelfieKtp', params: {editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, id_image: props.route.params.id_image, onGoBack: () => onGoBack(),}, })
-		else
-			props.navigation.navigate('Resume', {screen : 'SelfieKtp', params: {}, })
+		// else
+		// 	props.navigation.navigate('Resume', {screen : 'SelfieKtp', params: { editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, id_image: props.route.params.id_image, onGoBack: () => onGoBack(), }, })
 	}
 
 	return (

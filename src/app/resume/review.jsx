@@ -161,7 +161,7 @@ export default function ReviewResume(props) {
 			birth_date: resumeData.birth_date,
 			birth_date_moment: resumeData.birth_date_moment,
 			address: resumeData.address,
-			city: resumeData.city.name,
+			city: resumeData.city != null ? resumeData.city.name : '',
 		});
 		setInformasi_02({
 			marital_status: temp,

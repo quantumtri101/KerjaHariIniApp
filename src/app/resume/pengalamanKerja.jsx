@@ -116,7 +116,7 @@ export default function PengalamanKerja(props) {
 		return () => backHandler;
 	}, [view]);
 
-	useEffect(async () => {
+	useEffect(() => {
 		if(props.route.params.reviewResume){
 			handleEdit()
 		}

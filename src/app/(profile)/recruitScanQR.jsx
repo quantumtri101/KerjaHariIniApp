@@ -47,7 +47,7 @@ export default function RecruitScanQR(props) {
 		}
 	})
 
-  useEffect(async () => {
+  useEffect(() => {
     // (async () => {
     //   const { status } = await Camera.requestCameraPermissionsAsync();
     //   setHasCameraPermission(status);
@@ -66,10 +66,7 @@ export default function RecruitScanQR(props) {
     // }
     // getBarCodeScannerPermissions();
 
-    const status = await Camera.getCameraPermissionStatus()
-    if(status != 'authorized'){
-      const permission = await Camera.requestCameraPermission()
-    }
+    initPermission()
   }, []);
 
   useEffect(() =>  {
@@ -93,6 +90,13 @@ export default function RecruitScanQR(props) {
       setIsPleaseWaitShow(false)
     }, 1000)
   }, [getJobs.data, ])
+
+  async function initPermission(){
+    const status = await Camera.getCameraPermissionStatus();
+    if(status != 'authorized'){
+      const permission = await Camera.requestCameraPermission();
+    }
+  }
 
   const handleCapture = async () => {
     if (cameraRef.current) {
