@@ -83,6 +83,7 @@ const TextField = forwardRef(({
     setPickerState(selected.id)
     setPickerStateLabel(selected.name)
     setShowPicker(false)
+    value(selected.id)
   }
 
   const blur = () => {

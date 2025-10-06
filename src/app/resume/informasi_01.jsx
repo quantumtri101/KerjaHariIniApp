@@ -149,8 +149,11 @@ export default function Informasi01(props) {
 			setDate(moment(props.route.params.resumeData.birth_date))
 			setAlamat(props.route.params.resumeData.name)
 			if(props.route.params.resumeData.city != null){
-				setKota(props.route.params.resumeData.city.id)
-				setAutoCompleteSelectedItem(props.route.params.resumeData.city)
+				var city = props.route.params.resumeData.city
+				city.title = city.name
+
+				setKota(city.id)
+				setAutoCompleteSelectedItem(city)
 			}
 		}
 	}, []);
@@ -304,7 +307,7 @@ export default function Informasi01(props) {
 									<Text style={FONTSTYLES.asterisk}>*</Text>
 								</Text>
 								<AutocompleteDropdown
-									initialValue={kota}
+									initialValue={autoCompleteSelectedItem}
 									dataSet={autoCompleteSuggestList}
 									onSelectItem={item => onCitySelected(item)}
 									inputContainerStyle={{

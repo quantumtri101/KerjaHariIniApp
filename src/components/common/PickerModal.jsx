@@ -44,7 +44,7 @@ export default function PickerModal(props){
 							{
 								props.arr_option.map((option, index) => (
 									<TouchableOpacity onPress={() => setSelected(option)} style={{ borderRadius: 8, }} key={index}>
-										<View key={index} style={{ paddingHorizontal: 8, paddingVertical: 8, flexDirection: 'row', }}>
+										<View key={index} style={{ paddingHorizontal: 8, paddingVertical: 8, flexDirection: 'row', alignItems: 'center', }}>
 											<View>
 												<FontAwesomeIcon icon={selected.id == option.id ? faCircleDot : faCircle} style={{ color: COLORS.primary, }}/>
 											</View>

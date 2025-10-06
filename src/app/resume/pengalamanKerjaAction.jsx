@@ -61,8 +61,8 @@ export default function PengalamanKerjaAction(props) {
 
 	const [cityLabel, setCityLabel] = useState();
 
-	const [autoCompleteSuggestList, setAutoCompleteSuggestList] = useState(null);
-	const [autoCompleteSelectedItem, setAutoCompleteSelectedItem] = useState(null);
+	const [autoCompleteSuggestList, setAutoCompleteSuggestList] = useState([]);
+	const [autoCompleteSelectedItem, setAutoCompleteSelectedItem] = useState({});
 
 	const handleDelete = () => {
 		Alert.alert(
@@ -122,12 +122,24 @@ export default function PengalamanKerjaAction(props) {
 			setStart_year(props.data.start_year)
 			setEnd_year(props.data.end_year)
 			setCorporation(props.data.corporation)
-			setCity(props.data.city.id)
 			setDescription(props.data.description)
-			
+
+			if(props.data.city != null){
+				var city = {
+					id: props.data.city.id,
+					title: props.data.city.name,
+				}
+
+				setCity(city.id)
+				setAutoCompleteSelectedItem(city)
+			}
 		}
 		setEdit(props.data.id != null)
 	}, [props.data]);
+
+	// useEffect(() => {
+	// 	console.log(autoCompleteSuggestList)
+	// }, [autoCompleteSuggestList, ])
 
 	useEffect(() => {
 		var arr = [];
@@ -151,100 +163,121 @@ export default function PengalamanKerjaAction(props) {
 
 	}, [getCity.data]);
 
+	function onCitySelected(item){
+		console.log(item)
+		if(item != null){
+			setAutoCompleteSelectedItem(item)
+			setCity(item.id)
+		}
+	}
+
 	return (
 		<View style={{ flex: 1, }}>
-			<ScrollView style={{ backgroundColor: "white", paddingHorizontal: SIZES.xLarge }}>
-				<TextField
-					required
-					containerStyle={{ marginTop: 8 }}
-					label={"Pengalaman Kerja #" + (props.index < 0 ? props.arr.length + 1 : props.index + 1)}
-					placeholder={"(Posisi) di (Perusahaan)"}
-					onChangeText={(v) => setName(v) || setNameError(v == "" ? true : false)}
-					error={nameError}
-					errorMessage={"Silahkan lengkapi judul pengalaman"}
-					value={name}
-				/>
-
-				<View style={{ flexDirection: "row", gap: SIZES.medium }}>
-					<TextField
-						required
-						picker
-						pickerData={year}
-						containerStyle={{ flex: 1 }}
-						keyboardType={"numeric"}
-						label={"Tahun Mulai"}
-						placeholder={"Pilih tahun"}
-						value={(v) => setStart_year(v) || setStart_yearError(v == "" ? true : false)}
-						error={start_yearError}
-						errorMessage={"Silahkan pilih Tahun Mulai"}
-						preSelected={start_year}
-						preSelectedLabel={start_year}
-					/>
-					<Text style={{ marginTop: 40, marginHorizontal: SIZES.medium, }}>/</Text>
-					<TextField
-						required
-						picker
-						pickerData={arrEndYear}
-						containerStyle={{ flex: 1 }}
-						keyboardType={"numeric"}
-						label={"Tahun Berakhir"}
-						placeholder={"Pilih tahun"}
-						value={(v) => setEnd_year(v) || setEnd_yearError(v == "" ? true : false)}
-						error={end_yearError}
-						errorMessage={"Silahkan pilih Tahun Mulai"}
-						preSelected={end_year}
-						preSelectedLabel={end_year}
-					/>
-				</View>
-
-				<TextField
-					required
-					label={"Perusahaan"}
-					placeholder={"Nama Perusahaan"}
-					onChangeText={(v) => setCorporation(v) || setCorporationError(v == "" ? true : false)}
-					error={corporationError}
-					errorMessage={"Silahkan lengkapi nama perusahaan"}
-					value={corporation}
-				/>
-
-				<View style={{ paddingBottom: SIZES.small }}>
-					<Text style={[FONTSTYLES.inputLabel, { marginBottom: SIZES.xSmall / 2 }]}>
-						Lokasi Bekerja
-						<Text style={FONTSTYLES.asterisk}>*</Text>
-					</Text>
-					<AutocompleteDropdown
-						initialValue={city}
-						dataSet={autoCompleteSuggestList}
-						onSelectItem={setAutoCompleteSelectedItem}
-						inputContainerStyle={{
-							paddingVertical: SIZES.medium / 3,
+			{
+				getCity.isLoading ?
+					<View
+						style={{
+							flex: 1,
+							alignItems: "center",
+							justifyContent: "center",
 							backgroundColor: "white",
-							borderWidth: 1,
-							borderRadius: SIZES.medium / 2,
-							borderColor: COLORS.gray,
-						}}
-						textInputProps={{
-							placeholder: "Pilih Kota / Kabupaten",
-							placeholderTextColor: "#9e9e9e",
-							style: {
-								color: COLORS.gray_22,
-								fontSize: 14,
-								paddingStart: SIZES.medium,
-							},
-						}}
-						emptyResultText="Kota / Kabupaten Tidak Ditemukan"
-					/>
-				</View>
+						}}>
+						<ActivityIndicator size={"large"} color={COLORS.primary} />
+					</View>
+				:
+					<ScrollView style={{ backgroundColor: "white", paddingHorizontal: SIZES.xLarge }}>
+						<TextField
+							required
+							containerStyle={{ marginTop: 8 }}
+							label={"Pengalaman Kerja #" + (props.index < 0 ? props.arr.length + 1 : props.index + 1)}
+							placeholder={"(Posisi) di (Perusahaan)"}
+							onChangeText={(v) => setName(v) || setNameError(v == "" ? true : false)}
+							error={nameError}
+							errorMessage={"Silahkan lengkapi judul pengalaman"}
+							value={name}
+						/>
 
-				<TextField
-					label={"Deskripsi Pekerjaan"}
-					placeholder={"Deskripsi"}
-					multiline
-					numberOfLines={4}
-					onChangeText={(v) => setDescription(v)}
-					value={description}
-				/>
-			</ScrollView>
+						<View style={{ flexDirection: "row", gap: SIZES.medium }}>
+							<TextField
+								required
+								picker
+								pickerData={year}
+								containerStyle={{ flex: 1 }}
+								keyboardType={"numeric"}
+								label={"Tahun Mulai"}
+								placeholder={"Pilih tahun"}
+								value={(v) => setStart_year(v) || setStart_yearError(v == "" ? true : false)}
+								error={start_yearError}
+								errorMessage={"Silahkan pilih Tahun Mulai"}
+								preSelected={start_year}
+								preSelectedLabel={start_year}
+							/>
+							<Text style={{ marginTop: 40, marginHorizontal: SIZES.medium, }}>/</Text>
+							<TextField
+								required
+								picker
+								pickerData={arrEndYear}
+								containerStyle={{ flex: 1 }}
+								keyboardType={"numeric"}
+								label={"Tahun Berakhir"}
+								placeholder={"Pilih tahun"}
+								value={(v) => setEnd_year(v) || setEnd_yearError(v == "" ? true : false)}
+								error={end_yearError}
+								errorMessage={"Silahkan pilih Tahun Mulai"}
+								preSelected={end_year}
+								preSelectedLabel={end_year}
+							/>
+						</View>
+
+						<TextField
+							required
+							label={"Perusahaan"}
+							placeholder={"Nama Perusahaan"}
+							onChangeText={(v) => setCorporation(v) || setCorporationError(v == "" ? true : false)}
+							error={corporationError}
+							errorMessage={"Silahkan lengkapi nama perusahaan"}
+							value={corporation}
+						/>
+
+						<View style={{ paddingBottom: SIZES.small }}>
+							<Text style={[FONTSTYLES.inputLabel, { marginBottom: SIZES.xSmall / 2 }]}>
+								Lokasi Bekerja
+								<Text style={FONTSTYLES.asterisk}>*</Text>
+							</Text>
+							<AutocompleteDropdown
+								initialValue={autoCompleteSelectedItem}
+								dataSet={autoCompleteSuggestList}
+								onSelectItem={item => onCitySelected(item)}
+								inputContainerStyle={{
+									paddingVertical: SIZES.medium / 3,
+									backgroundColor: "white",
+									borderWidth: 1,
+									borderRadius: SIZES.medium / 2,
+									borderColor: COLORS.gray,
+								}}
+								textInputProps={{
+									placeholder: "Pilih Kota / Kabupaten",
+									placeholderTextColor: "#9e9e9e",
+									style: {
+										color: COLORS.gray_22,
+										fontSize: 14,
+										paddingStart: SIZES.medium,
+									},
+								}}
+								emptyResultText="Kota / Kabupaten Tidak Ditemukan"
+							/>
+						</View>
+
+						<TextField
+							label={"Deskripsi Pekerjaan"}
+							placeholder={"Deskripsi"}
+							multiline
+							numberOfLines={4}
+							onChangeText={(v) => setDescription(v)}
+							value={description}
+						/>
+					</ScrollView>
+			}
 
 			<View style={{ padding: 16, backgroundColor: COLORS.white }}>
 				{

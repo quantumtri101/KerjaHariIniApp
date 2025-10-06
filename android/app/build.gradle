@@ -82,8 +82,8 @@ android {
         applicationId "com.kerja.hariini"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 27
-        versionName "0.0.0027"
+        versionCode 29
+        versionName "0.0.0029"
     }
     signingConfigs {
         debug {

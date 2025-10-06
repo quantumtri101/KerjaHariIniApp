@@ -134,9 +134,7 @@ export default function PengalamanKerja(props) {
 			resumeData.experience.forEach((e) => {
 				arrExp.push({
 					id: e.id,
-					city: {
-						id: e.city_id,
-					},
+					city: e.city,
 					name: e.name,
 					start_year: e.start_year,
 					end_year: e.end_year,

@@ -390,29 +390,37 @@ export default function ReviewResume(props) {
 							id_image == '' || selfie_image == '' ?
 								<ActivityIndicator size={"large"} color={COLORS.primary} />
 							:
-								<View>
+								<View style={{ flexDirection: 'row', justifyContent: 'flex-start', }}>
 									{
 										id_image != null &&
-										<View style={[styles.detailContainerRow, { paddingBottom: 5 }]}>
-											<MaterialCommunityIcons
-												name="check-circle-outline"
-												size={16}
-												color={id_image != '' ? COLORS._AcceptedText : COLORS._RejectedText}
-											/>
-											<Text style={[FONTSTYLES.reg10_7373, { color: COLORS._AcceptedText }]}>KTP.jpg</Text>
+										<View style={{ }}>
+											<View style={[styles.detailContainerRow, { paddingBottom: 5 }]}>
+												<MaterialCommunityIcons
+													name="check-circle-outline"
+													size={16}
+													color={id_image != '' ? COLORS._AcceptedText : COLORS._RejectedText}
+												/>
+												<Text style={[FONTSTYLES.reg10_7373, { color: COLORS._AcceptedText }]}>KTP.jpg</Text>
+											</View>
+
+											<Image source={{ uri: `${base.host}/image/resume/id?file_name=${id_image}&rnd=${moment().format("YYYYMMDDHHmmss")}` }} style={{ width: 100, height: 100, borderRadius: 16, }} resizeMode="contain"/>
 										</View>
 									}
 									{
 										selfie_image != null &&
-										<View style={[styles.detailContainerRow, { paddingBottom: 5 }]}>
-											<MaterialCommunityIcons
-												name="check-circle-outline"
-												size={16}
-												color={selfie_image != '' ? COLORS._AcceptedText : COLORS._RejectedText}
-											/>
-											<Text style={[FONTSTYLES.reg10_7373, { color: COLORS._AcceptedText }]}>
-												KTP_Selfie.jpg
-											</Text>
+										<View style={{ marginLeft: 16, }}>
+											<View style={[styles.detailContainerRow, { paddingBottom: 5 }]}>
+												<MaterialCommunityIcons
+													name="check-circle-outline"
+													size={16}
+													color={selfie_image != '' ? COLORS._AcceptedText : COLORS._RejectedText}
+												/>
+												<Text style={[FONTSTYLES.reg10_7373, { color: COLORS._AcceptedText }]}>
+													KTP_Selfie.jpg
+												</Text>
+											</View>
+
+											<Image source={{ uri: `${base.host}/image/resume/selfie?file_name=${id_image}&rnd=${moment().format("YYYYMMDDHHmmss")}` }} style={{ width: 100, height: 100, borderRadius: 16, }} resizeMode="contain"/>
 										</View>
 									}
 								</View>
