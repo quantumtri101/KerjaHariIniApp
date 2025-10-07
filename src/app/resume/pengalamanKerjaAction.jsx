@@ -11,13 +11,8 @@ import {
 	ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useReducer, useState } from "react";
-// import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import Header from "../../components/common/header/header";
 import { COLORS, FONTS, FONTSTYLES, SIZES } from "../../constants";
 import { Button, TextField, HeaderResume, } from "../../components";
-// import { FontAwesome5 } from "@expo/vector-icons";
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from "moment";
 import useFetch from "../../hook/useFetch";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -31,7 +26,6 @@ export default function PengalamanKerjaAction(props) {
 	const getResume = useFetch("GET", "resume", {}, false);
 
 	const pengalaman = [];
-	// const pengalamanLength = pengalaman.length + 1
 	const year = [];
 	for (let i = 1970; i <= moment().get("year"); i++) {
 		year.push({ name: i.toString(), id: i });
@@ -52,14 +46,6 @@ export default function PengalamanKerjaAction(props) {
 	const [start_yearError, setStart_yearError] = useState(false);
 	const [end_yearError, setEnd_yearError] = useState(false);
 	const [corporationError, setCorporationError] = useState(false);
-	const [cityError, setCityError] = useState(false);
-	const [descriptionError, setDescriptionError] = useState(false);
-	const [recordError, setRecordError] = useState(false);
-	const [flag_afterInitRecord, setflag_afterInitRecord] = useState(false);
-
-	const [record, setRecord] = useState([]);
-
-	const [cityLabel, setCityLabel] = useState();
 
 	const [autoCompleteSuggestList, setAutoCompleteSuggestList] = useState([]);
 	const [autoCompleteSelectedItem, setAutoCompleteSelectedItem] = useState({});
@@ -136,10 +122,6 @@ export default function PengalamanKerjaAction(props) {
 		}
 		setEdit(props.data.id != null)
 	}, [props.data]);
-
-	// useEffect(() => {
-	// 	console.log(autoCompleteSuggestList)
-	// }, [autoCompleteSuggestList, ])
 
 	useEffect(() => {
 		var arr = [];

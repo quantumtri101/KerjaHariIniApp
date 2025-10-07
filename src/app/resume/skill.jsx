@@ -10,19 +10,15 @@ import {
 	KeyboardAvoidingView,
 } from "react-native";
 import React, { useCallback, useEffect, useMemo, useReducer, useState } from "react";
-// import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import Header from "../../components/common/header/header";
 import { COLORS, FONTSTYLES, SIZES } from "../../constants";
 import { Button, TextField, HeaderResume, } from "../../components";
-// import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useFetch from "../../hook/useFetch";
 import ModalPreloader from "../../components/common/PleaseWaitModal";
 import Base from "../../utils/base";
-import { element } from "prop-types";
 
 export default function ResumeSkill(props) {
 	var base = new Base()
@@ -55,9 +51,6 @@ export default function ResumeSkill(props) {
 	}, []);
 
 	useEffect(() => {
-		// if(props.route.params.editResume && resumeData.id == null)
-		// 	getResume.fetchData();
-		// else{
 			setIsModal(false)
 			if(fromSystem){
 				setFromSystem(false)
@@ -79,7 +72,6 @@ export default function ResumeSkill(props) {
 
 			setFromSystem(true)
 			setArr(arr_temp)
-		// }
 	}, [arr, resumeData, ])
 
 	useEffect(() => {
@@ -201,17 +193,6 @@ export default function ResumeSkill(props) {
 		setAddSkill(false)
 	}
 
-	// useEffect(() => {
-	// 	setIsModal(false)
-	// 	if(getResume.data.status != null){
-	// 		if(getResume.data.status == "success"){
-	// 			setResumeData(getResume.data.data)
-	// 		}
-	// 		else
-	// 			base.alertSnackbar(getResume.data.message)
-	// 	}
-	// }, [getResume.data]);
-
 	useEffect(() => {
 		if(postResume.data.status != null){
 			if(postResume.data.status == "success"){
@@ -225,11 +206,6 @@ export default function ResumeSkill(props) {
 
 	return (
 		<View style={{ flex: 1, }}>
-			{/* <Stack.Screen
-				options={{
-					header: () => null,
-				}}
-			/> */}
 			<View style={{ backgroundColor: "white" }}>
 				<Header backButton title={"Pengisian Resume"} navigation={props.navigation}/>
 			</View>
@@ -264,7 +240,6 @@ export default function ResumeSkill(props) {
 			</View>
 
 			<View style={{ padding: 16, backgroundColor: COLORS.white }}>
-				{/* <Button title={reviewResume ? 'Simpan' : 'Lanjut'} style={{ height: 30 }} onPress={() => reviewResume ? router.back() : router.push('/resume/ktp')} /> */}
 				{
 					addSkill ?
 					<View style={{  }}>

@@ -1,11 +1,8 @@
 import { ActivityIndicator, ScrollView, StyleSheet, Text, ToastAndroid, View } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
-// import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import Header from '../../components/common/header/header'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { COLORS, FONTSTYLES, SIZES } from '../../constants'
 import { Button, FieldPicker, TextField, HeaderResume, } from '../../components'
-import { Picker } from '@react-native-picker/picker'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import useFetch from '../../hook/useFetch'
 import Base from "../../utils/base";
@@ -19,8 +16,6 @@ const statusData = [
 
 export default function Informasi02(props) {
 	var base = new Base()
-  // const router = useRouter()
-  // const { reviewResume, editResume } = useLocalSearchParams()
   const getEducation = useFetch("GET", "education/all", {})
   const getBank = useFetch("GET", "bank/all", {})
   const getResume = useFetch("GET", "resume", {}, false)
@@ -49,9 +44,6 @@ export default function Informasi02(props) {
 	])
 	const [arrBank, setArrBank] = useState([])
 
-  const [heightError, setHeightError] = useState(false)
-  const [weightError, setWeightError] = useState(false)
-
 	const [preSelectedLabelMaritalStatus, setPreSelectedLabelMaritalStatus] = useState('')
   const [preSelectedLabelEducation, setPreSelectedLabelEducation] = useState('')
   const [preSelectedLabelBank, setPreSelectedLabelBank] = useState('')
@@ -69,9 +61,6 @@ export default function Informasi02(props) {
   }, false)
 
 	useEffect(() => {
-		// if(props.route.params.editResume)
-		// 	getResume.refetch()
-
 		if(props.route.params.reviewResume)
 			handleEdit()
 		else if(props.route.params.resumeData == null){
@@ -199,16 +188,6 @@ export default function Informasi02(props) {
     	setId_number(id_number.substring(0, id_number.length > 16 ? 16 : id_number.length))
   }, [id_number, ])
 
-  // useEffect(() => {
-	// 	if(getResume.data.status != null){
-	// 		if(getResume.data.status == 'success'){
-	// 			setResumeData(getResume.data.data)
-	// 		}
-	// 		else
-	// 			base.alertSnackbar(getResume.data.message)
-	// 	}
-  // }, [getResume.data])
-
   useEffect(() => {
 		if(postResume.data.status != null){
 			if(postResume.data.status == 'success'){
@@ -222,11 +201,6 @@ export default function Informasi02(props) {
 
   return (
     <View style={{ flex: 1, }}>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={props.route.params.editResume ? 'Edit Resume' : 'Pengisian Resume'} navigation={props.navigation}/>
       </View>

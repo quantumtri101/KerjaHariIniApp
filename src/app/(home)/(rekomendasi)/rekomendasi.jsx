@@ -10,8 +10,6 @@ import SemuaPekerjaan from "./semuaPekerjaan";
 const Tab = createMaterialTopTabNavigator();
 
 export default function Rekomendasi(props) {
-  const DH = Dimensions.get('screen').height
-  const TabNavHeight = Dimensions.get('screen').height - useSafeAreaInsets().top - 170
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }} >
       <Header noInsets withNotif title={'Rekomendasi'} navigation={props.navigation}/>

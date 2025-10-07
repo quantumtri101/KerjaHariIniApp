@@ -5,13 +5,11 @@ import {
   TouchableNativeFeedback,
   View,
 } from "react-native";
-// import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import React, { useEffect } from "react";
 import { COLORS, FONTS, FONTSTYLES, SIZES } from "../../constants";
 import Base from "../../utils/base";
-// import { useRouter } from "expo-router";
 import moment from "moment";
 import "moment/locale/id";
 import useFetch from "../../hook/useFetch";
@@ -19,15 +17,6 @@ import { logo } from "../../assets/png";
 
 const UrgentNeededJobs = ({ data, keys, userID, navigation, }) => {
 	var base = new Base()
-  // const router = useRouter();
-  // console.log('UrgentData', data)
-  // const getJobsImage = data.company.file_name == null ? null : useFetch('GET', 'image/company?file_name='+data.company.file_name, {})
-  // console.log('data.application', data.application)
-  useEffect(() => {
-    // console.log('keys', keys)
-    // console.log('userID', userID)
-    // console.log('data application: ', data)
-  }, []);
 
 	function onDetail(){
 		navigation.navigate('JobDetail', {screen: 'JobDetailIndex', params: {from: 'home', urgent: true, id: data.id, userID: userID,}, })
@@ -46,7 +35,6 @@ const UrgentNeededJobs = ({ data, keys, userID, navigation, }) => {
                 },
               ]}>
               <Text style={_unjs.urgentBadgeText}>
-                {/* data.application.user_id == userID ? */}
                 {data.application.length > 0 ? "Telah Dilamar" : "Mendesak"}
               </Text>
             </View>
@@ -75,9 +63,6 @@ const UrgentNeededJobs = ({ data, keys, userID, navigation, }) => {
               ellipsizeMode="tail"
               style={_unjs.jobsTitle}>
               {data.name}
-              {/* {data.id} */}
-              {/* {data.company.file_name} */}
-              {/* Doorbell 6 Jam di acara Pernikahan */}
             </Text>
           </View>
           <View
@@ -92,9 +77,7 @@ const UrgentNeededJobs = ({ data, keys, userID, navigation, }) => {
               color={COLORS.rockBlue}
             />
             <Text style={FONTSTYLES.reg12_rockBlue}>
-              {/* Sabtu, 2 Jan 2023 | Pk. 09.00 */}
               {data.shift.length > 0 ? data.shift[0].start_date_moment.format("dddd, DD MMM YYYY | [Pk.] HH.mm") : '-'}
-              {/* {moment(data.shift[0].end_date_format).format('dddd, DD MMM YYYY | [Pk.] HH.mm')} */}
             </Text>
           </View>
         </View>
@@ -146,9 +129,9 @@ const _unjs = StyleSheet.create({
 });
 
 const Jobs = ({ data, from, keys, userID, navigation, }) => {
-  // const router = useRouter();
 	var base = new Base()
   const getCity = useFetch("GET", "city?id=" + data.city_id, {});
+
   return (
     <View style={_jobs.touchableContainer} key={keys}>
       <TouchableNativeFeedback
@@ -213,7 +196,6 @@ const Jobs = ({ data, from, keys, userID, navigation, }) => {
               style={_jobs.jobsTitle}
             >
               {data.name}
-              {/* Doorbell 6 Jam di acara Pernikahan */}
             </Text>
             <View style={{ flex: 1 }} />
             <View style={_jobs.rightArrowContainer}>
@@ -243,7 +225,6 @@ const Jobs = ({ data, from, keys, userID, navigation, }) => {
                 color={COLORS.rockBlue}
               />
               <Text style={[FONTSTYLES.reg12_rockBlue, { color: COLORS.secondary }]}>
-                {/* Hotel Marriott Surabaya */}
                 {getCity.data.data?.name}
               </Text>
             </View>
@@ -257,7 +238,6 @@ const Jobs = ({ data, from, keys, userID, navigation, }) => {
                 style={[FONTSTYLES.reg12_rockBlue, { color: COLORS.secondary }]}
               >
                 Rp. {data.salary_casual.toLocaleString(base.priceFormatIDR)}
-                {/* Rp. 3.500.000 */}
               </Text>
             </View>
           </View>
@@ -274,7 +254,6 @@ const _jobs = StyleSheet.create({
     overflow: "hidden",
   },
   mainContainer: {
-    // gap: SIZES.xSmall,
     backgroundColor: COLORS.lightWhite2,
     borderRadius: SIZES.medium,
   },

@@ -11,12 +11,9 @@ import {
 	ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useReducer, useState } from "react";
-// import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import Header from "../../components/common/header/header";
 import { COLORS, FONTS, FONTSTYLES, SIZES } from "../../constants";
 import { Button, TextField, HeaderResume, } from "../../components";
-// import { FontAwesome5 } from "@expo/vector-icons";
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from "moment";
 import useFetch from "../../hook/useFetch";
@@ -34,7 +31,6 @@ export default function PengalamanKerja(props) {
 
 	//===ItemListStart===//
 	const ItemList = ({ item, index }) => {
-		// const a = getCity.data.data?.filter(i => i.id == ((editResume, !flag_afterInitRecord) ? item?.city_id : (editResume, flag_afterInitRecord) && item.city?.id))
 		const getCityList = useFetch("GET", "city?id=" + item.city.id, {});
 
 		return (
@@ -69,9 +65,6 @@ export default function PengalamanKerja(props) {
 		);
 	};
 	//===ItemListEnd===//
-
-	// const router = useRouter();
-	// const { reviewResume, editResume } = useLocalSearchParams();
 
 	const [view, setView] = useState("list");
 	const [selectedData, setSelectedData] = useState({})
@@ -196,11 +189,6 @@ export default function PengalamanKerja(props) {
 
 	return (
 		<AutocompleteDropdownContextProvider>
-			{/* <Stack.Screen
-				options={{
-					header: () => null,
-				}}
-			/> */}
 			<View style={{ backgroundColor: "white" }}>
 				<Header
 					backButton

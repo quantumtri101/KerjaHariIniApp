@@ -23,7 +23,6 @@ import Base from "../../utils/base";
 
 export default function LoginScreen(props) {
 	var base = new Base()
-	// const router = useRouter();
 	const [phoneNum, setPhoneNum] = useState('');
 	const [password, setPassword] = useState('');
 	const [fcmToken, setFcmToken] = useState('');
@@ -31,8 +30,6 @@ export default function LoginScreen(props) {
 	const [isPhoneErrorMessage, setIsPhoneErrorMessage] = useState("");
 	const [isPassError, setIsPassError] = useState(false);
 	const [isPassErrorMessage, setIsPassErrorMessage] = useState(false);
-	const [requirementPage, setRequirementPage] = useState(null);
-	const [requirementFinish, setRequirementFinish] = useState(null);
 	const passRef = useRef();
 	const phoneRef = useRef();
 	const { data, isLoading, error, refetch, fetchData } = useFetch("POST", "auth/login", {
@@ -64,10 +61,8 @@ export default function LoginScreen(props) {
 	};
 
 	const generateFCMDeviceToken = async () => {
-		// await messaging().registerDeviceForRemoteMessages();
 		const token = await messaging().getToken();
 		setFcmToken(token);
-		// return await AsyncStorage.setItem('token', token)
 	};
 
 	useEffect(() => {
@@ -76,12 +71,10 @@ export default function LoginScreen(props) {
 
 	useEffect(() => {
 		PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-		// getToken()
 		generateFCMDeviceToken();
 	}, []);
 
 	useEffect(() => {
-		// setToken('Bearer 101|4OZfiotOxgpnn783dJdlnXdT5x2NcRac0o99SH6K')
 		if(data.status != null){
 			if (data.status == "success") {
 				var arrNextPage = manageNextPage()
@@ -142,18 +135,12 @@ export default function LoginScreen(props) {
 
 
 			<ScrollView style={styles.scrollView}>
-				{/* <Stack.Screen
-					options={{
-						header: () => <Header />,
-					}}
-				/> */}
 				<View style={{ flex: 1, }}>
 					<Header/>
 
 					<View style={styles.container}>
 						<Text style={FONTSTYLES.h1}>Selamat Datang{"\n"}Kembali</Text>
 						<Text style={FONTSTYLES.p}>Lakukan Pengisian Data Anda</Text>
-						{/* <Skeleton height={40} width={100} borderRadius={16}/> */}
 						<TextField
 							ref={phoneRef}
 							containerStyle={{ marginTop: 40 }}
@@ -215,7 +202,6 @@ export default function LoginScreen(props) {
 							<TouchableOpacity
 								onPress={() => {
 									props.navigation.replace('Auth', {screen : 'Register', })
-									// router.push("/(auth)/register");
 								}}>
 								<Text style={[FONTSTYLES.p, { color: COLORS.primary, fontFamily: FONTS.bold }]}>
 									Lakukan Registrasi

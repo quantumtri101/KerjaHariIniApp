@@ -21,8 +21,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import svg_confirmed from "../../assets/svg/confirmed.svg";
 
 export default function RegisterScreen(props) {
-	// const router = useRouter();
-
 	const genderList = [{ value: "Pria" }, { value: "Wanita" }];
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("+62");
@@ -44,8 +42,6 @@ export default function RegisterScreen(props) {
 	const [isGenderErrorMessage, setIsGenderErrorMessage] = useState(false);
 	const [isEmailErrorMessage, setIsEmailErrorMessage] = useState(false);
 	const [isPassErrorMessage, setIsPassErrorMessage] = useState(false);
-
-	const [modalVisible, setModalVisible] = useState(false);
 
 	const nameRef = useRef();
 	const phoneRef = useRef();
@@ -119,11 +115,6 @@ export default function RegisterScreen(props) {
 		return passCheck == null
 	};
 
-	const setTempToken = async (tempToken) => {
-		// console.log("tokk", token);
-		return await AsyncStorage.setItem("tempToken", tempToken);
-	};
-
 	const handleRegister = () => {
 		setShowFetchErrorMessage(false);
 		if ((checkName(), checkPhone(), checkGender(), checkEmail(), checkPass())) {
@@ -145,11 +136,8 @@ export default function RegisterScreen(props) {
 	useEffect(() => {
 		if (postRegister.data.status == "success") {
 			setShowFetchErrorMessage(false);
-			// setModalVisible(true);
 			AsyncStorage.setItem('token', postRegister.data.token)
-			// setToken(postRegister.data.token);
 			props.navigation.replace('Auth', {screen : 'OTPScreen', params: {prev: 'register', }, })
-			// router.push("/otp?prev=register");
 		} else if (postRegister.data.status == "error") {
 			if (postRegister.data.message == "User already exist") {
 				setFetchErrorMessage("No. Handphone telah terdaftar");
@@ -157,18 +145,12 @@ export default function RegisterScreen(props) {
 				setFetchErrorMessage(postRegister.data.message);
 			}
 			setShowFetchErrorMessage(true);
-			// console.log('Fetch Error :', data.message)
 		}
 	}, [postRegister.data]);
 
 
 	return (
 		<ScrollView style={styles.scrollView}>
-			{/* <Stack.Screen
-				options={{
-					header: () => <Header />,
-				}}
-			/> */}
 			<Header />
 
 			<View style={[styles.container, { marginTop: 0, }]}>
@@ -260,7 +242,6 @@ export default function RegisterScreen(props) {
 					<TouchableOpacity
 						onPress={() => {
 							props.navigation.replace('Auth', {screen : 'Login', })
-							// router.push("/login");
 						}}>
 						<Text style={[FONTSTYLES.p, { color: COLORS.primary, fontFamily: FONTS.bold }]}>
 							Masuk
@@ -268,14 +249,6 @@ export default function RegisterScreen(props) {
 					</TouchableOpacity>
 				</View>
 			</View>
-			{/* <Modals
-				svg={svg_confirmed}
-				title={"Akun telah terdaftar !"}
-				desc={"Silahkan login dengan akun anda."}
-				buttonTitle={"Login"}
-				visible={modalVisible}
-				onPress={() => router.replace("/login")}
-			/> */}
 		</ScrollView>
 	);
 }

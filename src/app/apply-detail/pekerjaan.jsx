@@ -2,7 +2,6 @@ import { StyleSheet, Text, TouchableNativeFeedback, TouchableOpacity, View } fro
 import React, { useEffect, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native';
 import { COLORS, FONTSTYLES, SIZES } from '../../constants';
-// import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';

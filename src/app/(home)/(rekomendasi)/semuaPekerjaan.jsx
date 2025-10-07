@@ -16,8 +16,6 @@ import { COLORS, FONTS, FONTSTYLES, SIZES } from "../../../constants";
 import { LocalSvg } from "react-native-svg/css";
 import { search_config } from "../../../assets";
 import { Pressable } from "react-native";
-// import { useRouter } from "expo-router";
-// import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import useFetch from "../../../hook/useFetch";
 import moment from "moment";
@@ -26,7 +24,6 @@ import Base from "../../../utils/base";
 
 export default function SemuaPekerjaan(props) {
 	var base = new Base()
-  // const router = useRouter();
   const [filter_subCategory, setFilter_subCategory] = useState("");
   const [search, setSearch] = useState("");
   const [arrJobs, setArrJobs] = useState([]);
@@ -42,10 +39,8 @@ export default function SemuaPekerjaan(props) {
     {},
     false
   );
-  // const getAllJobs = useFetch('GET', 'jobs?name=' + search + '&sub_category_id=' + filter_subCategory, {}, false)
   const getSubCategory = useFetch("GET", "sub-category", {});
   const Item_horizontalFlatList = ({ item, index, active }) => {
-    // const [selected, setSelected] = useState('')
     return (
       <TouchableOpacity key={index} onPress={() => setFilter_subCategory(filter_subCategory != item.id ? item.id : '')}>
         <View style={{ alignItems: "center" }}>
@@ -57,7 +52,6 @@ export default function SemuaPekerjaan(props) {
               },
             ]}
           >
-            {/* <LocalSvg asset={search_config} style={{maxWidth: 24, maxHeight: 24}}/> */}
             {
               item.file_name == null ?
                 <MaterialIcons
@@ -124,10 +118,6 @@ export default function SemuaPekerjaan(props) {
     }
   }, [search, ])
 
-  // return getAllJobs.isLoading ?
-  // <ActivityIndicator size={'large'} color={COLORS.primary} />
-  // :
-
   function onRefreshed(){
     setArrJobs([])
     getAllJobs.refetch()
@@ -149,9 +139,6 @@ export default function SemuaPekerjaan(props) {
           onChangeText={(text) => setSearch(text)}
           value={search}
         />
-        {/* <TouchableOpacity onPress={() => { }} style={{ justifyContent: 'center', paddingBottom: SIZES.xSmall }}>
-          <LocalSvg asset={search_config} />
-        </TouchableOpacity> */}
       </View>
       
       <View>
@@ -222,7 +209,6 @@ export default function SemuaPekerjaan(props) {
                 userID={getProfile.data.data?.id}
               />
           }
-          // renderItem={() => <Card.Jobs onPress={() => router.push('job-detail/[id]?from=rekomendasi')}/>}
           style={{ flex: 1, backgroundColor: COLORS.white }}
         />
       }

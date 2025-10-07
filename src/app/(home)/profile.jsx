@@ -11,13 +11,9 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import React, { useCallback, useEffect, useState } from "react";
 import { COLORS, FONTS, FONTSTYLES, SIZES } from "../../constants";
-// import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "../../components/common/header/header";
 import ModalPreloader from "../../components/common/PleaseWaitModal";
-// import { useRouter, useFocusEffect } from "expo-router";
 import useFetch from "../../hook/useFetch";
 import AsyncStorage, {
   useAsyncStorage,
@@ -31,7 +27,6 @@ import Base from "../../utils/base";
 
 export default function Profile(props) {
 	var base = new Base()
-  // const router = useRouter();
   const [token, setToken] = useState(null);
   const { getItem, setItem } = useAsyncStorage("token");
 	const menu = [

@@ -1,11 +1,9 @@
 import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
-// import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import Header from '../../components/common/header/header'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { COLORS, FONTSTYLES, SIZES } from '../../constants'
 import { Button, CheckBox, Skeleton, TextField } from '../../components'
-// import { FontAwesome, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,9 +14,7 @@ import moment from 'moment'
 import 'moment/locale/id'
 
 export default function ApplyReview(props) {
-  // const router = useRouter()
   const [agree, setAgree] = useState(false)
-  // const { jobs_id, content } = useLocalSearchParams()
 
   const getResume = useFetch('GET', 'resume', {})
   const getEducation = useFetch('GET', 'education?id=' + getResume.data.data?.education_id, {}, false)
@@ -46,22 +42,11 @@ export default function ApplyReview(props) {
     }
   }, [postApplication.data])
 
-  // const handleButton = () => {
-  //   postApplication.fetchData()
-  // }
-
   return (
     <View style={{ flex: 1, }}>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Review Lamaran'} navigation={props.navigation}/>
       </View>
-      {/* <View style={{backgroundColor: 'white', width: '100%'}}>
-      </View> */}
       <ScrollView style={{ backgroundColor: 'white', paddingHorizontal: SIZES.xLarge }}>
         {
 					(getResume.isLoading, getEducation.isLoading, getQuiz.isLoading) ?
@@ -85,14 +70,12 @@ export default function ApplyReview(props) {
                 <View style={styles.rightArrowContainer}>
                   <MaterialCommunityIcons name='chevron-right' size={SIZES.xLarge} color={COLORS.rockBlue} />
                 </View>
-                {/* <FontAwesome name="file-text" size={36} color="black" /> */}
               </View>
               <View style={styles.divider} />
               <View style={styles.detailContainer}>
                 <View style={styles.detailContainerRow}>
                   <MaterialCommunityIcons name='clock' size={SIZES.medium} color={COLORS.rockBlue} />
                   <Text style={[FONTSTYLES.reg12_rockBlue, { color: COLORS.secondary }]}>
-                    {/* Nama Lengkap Anda */}
                     {getResume.data.data?.name}
                   </Text>
                 </View>
@@ -100,14 +83,12 @@ export default function ApplyReview(props) {
                   <MaterialCommunityIcons name='map-marker' size={SIZES.medium} color={COLORS.rockBlue} />
                   <Text style={[FONTSTYLES.reg12_rockBlue, { color: COLORS.secondary }]}>
                     {moment(getResume.data.data?.birth_date).format('DD MMMM YYYY')}
-                    {/* Tempat, Tanggal Lahir */}
                   </Text>
                 </View>
                 <View style={styles.detailContainerRow}>
                   <MaterialCommunityIcons name='school' size={SIZES.medium} color={COLORS.rockBlue} />
                   <Text style={[FONTSTYLES.reg12_rockBlue, { color: COLORS.secondary }]}>
                     {getEducation.data.data?.name}
-                    {/* SMK Negeri 1 Surabaya */}
                   </Text>
                 </View>
               </View>

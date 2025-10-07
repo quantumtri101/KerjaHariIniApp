@@ -1,19 +1,12 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { gif_faceRecognition } from '../../assets'
-// import { Stack, useRouter } from 'expo-router'
 import { FONTS, FONTSTYLES, SIZES } from '../../constants'
 import { Button, Header } from '../../components'
 
 export default function VerifikasiPenerimaan(props) {
-  // const router = useRouter()
   return (
-    <>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
+    <View>
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Verifikasi Penerimaan'} navigation={props.navigation}/>
       </View>
@@ -31,7 +24,7 @@ export default function VerifikasiPenerimaan(props) {
         </View>
 
       </View>
-    </>
+    </View>
   )
 }
 

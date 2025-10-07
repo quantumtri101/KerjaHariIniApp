@@ -11,12 +11,7 @@ export default function PrivacyPolicy(props) {
 	var base = new Base()
 
   return (
-    <>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
+    <View>
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Privacy Policy'} navigation={props.navigation}/>
       </View>
@@ -28,7 +23,7 @@ export default function PrivacyPolicy(props) {
         containerStyle={{paddingHorizontal: 16, paddingBottom: 16, backgroundColor: COLORS.white}}
         showsVerticalScrollIndicator={false}
       />
-    </>
+    </View>
   )
 }
 

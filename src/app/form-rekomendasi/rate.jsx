@@ -2,8 +2,6 @@ import { StyleSheet, Text, View, ScrollView, Pressable, TextInput, FlatList, Tou
 import React, { useState, useEffect } from 'react'
 import { Button, Header, RadioButtonList, SearchCheckboxList } from '../../components'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
-// import { Stack, useRouter } from 'expo-router'
-// import Icon from '@expo/vector-icons/MaterialIcons'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import useFetch from '../../hook/useFetch'
 import { formatCurrency } from '../../utils'
@@ -24,10 +22,8 @@ const CheckBoxItem = ({ item, onChange, selected }) => {
 };
 
 export default function FormRekomendasiRate(props) {
-  // const router = useRouter()
   const { data, isLoading, error, refetch } = useFetch("GET", "range-salary/all?file_name=", {});
   const dataPost = useFetch("POST", "jobs/recommendation", {}, false);
-  // refetch()
   const [selected, setSelected] = useState({})
 
   useEffect(() => {
@@ -36,7 +32,6 @@ export default function FormRekomendasiRate(props) {
         AsyncStorage.removeItem('arr_sub_category')
         AsyncStorage.removeItem('arr_city')
 				props.navigation.navigate('FormRekomendasi', {screen : 'Finish', params: {}, })
-        // router.push('/form-rekomendasi/finish')
       }
       else
         console.log('DATA POST', dataPost.data.message)
@@ -76,7 +71,6 @@ export default function FormRekomendasiRate(props) {
       console.log('bodyPost', bodyPost)
 
       dataPost.setRefetch(bodyPost)
-      // getAsyncRecomendation()
     }
   }
 
@@ -90,8 +84,8 @@ export default function FormRekomendasiRate(props) {
         yang diharapkan
       </Text>
       <View style={[styles.mainContainer, { paddingHorizontal: SIZES.small }]}>
-        {/* <RadioButtonList inputData={dummyData} /> */}
-        {isLoading ?
+        {
+          isLoading ?
           <ActivityIndicator size={'large'} color={COLORS.primary} />
           :
           <View style={{ flex: 1, padding: 10 }}>
@@ -108,14 +102,14 @@ export default function FormRekomendasiRate(props) {
         }
       </View>
       <View style={{ padding: SIZES.medium, backgroundColor: 'white' }} >
-        {dataPost.isLoading || isLoading ?
+        {
+          dataPost.isLoading || isLoading ?
           <ActivityIndicator size={'large'} color={COLORS.primary} />
           :
-          <>
+          <View>
             <Button title={'Lewati'} outline onPress={() => handleSaveButton('Lewati')} style={{ marginBottom: SIZES.medium }} />
-            {/* <Button title={'Lanjut'} onPress={() => router.push('/form-rekomendasi/finish')} /> */}
             <Button title={'Lanjut'} onPress={() => handleSaveButton('Lanjut')} />
-          </>
+          </View>
         }
       </View>
     </View>

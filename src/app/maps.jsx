@@ -5,22 +5,16 @@ import Geolocation from '@react-native-community/geolocation';
 import { StackActions } from '@react-navigation/native';
 import { COLORS, SIZES } from "../constants";
 import { Alert, Button, Header, Modals } from '../components/common'
-// import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-// import * as Location from 'expo-location'
 import { calculateDistance } from "../utils";
-// import { Feather } from '@expo/vector-icons'
 import Feather from 'react-native-vector-icons/Feather';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import useFetch from "../hook/useFetch";
 import { svg_qr } from "../assets";
 import moment from "moment";
-// import Icons from '@expo/vector-icons/MaterialCommunityIcons'
 import 'moment/locale/id'
 
 
 export default function Maps(props) {
-  // const router = useRouter()
-  // const { from, state, qrID, jobsName, companyLat, companyLong } = useLocalSearchParams()
   const [disabledProceed, setDisableProceed] = useState(true)
   const [modalVisible, setModalVisible] = useState(false)
   const [location, setLocation] = useState({
@@ -31,8 +25,6 @@ export default function Maps(props) {
     latitude: 0,
     longitude: 0,
   })
-
-  // const [hasLocationPermission, setHasLocationPermission] = useState(null)
 
   const postCheckLog = useFetch('POST', 'check-log/action', {
     id: props.route.params.params.qrID,
@@ -53,11 +45,6 @@ export default function Maps(props) {
 				longitude: parseFloat(info.coords.longitude),
 			})
 		})
-    // setTimeout(() => {
-      // getLocation()
-      // checkRadius()
-      // location.latitude == 0 && getLocation()
-    // }, 500);
   }, [])
 
   useEffect(() => {
@@ -89,11 +76,6 @@ export default function Maps(props) {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
       <View style={{ zIndex: 9999, }}>
         <Header
           backButton
@@ -114,7 +96,6 @@ export default function Maps(props) {
 					(location.latitude != 0 && location.longitude != 0 && targetlocation.latitude != 0 && targetlocation.longitude != 0) &&
 					<MapView
 						style={styles.map}
-						//specify our coordinates.
 						initialRegion={{
 							latitude: props.route.params.params.from == 'scanQR' ? location.latitude : targetlocation.latitude,
 							longitude: props.route.params.params.from == 'scanQR' ? location.longitude : targetlocation.longitude,
@@ -168,7 +149,6 @@ export default function Maps(props) {
   );
 }
 
-//create our styling code:
 const styles = StyleSheet.create({
   container: {
     flex: 1, //the container will fill the whole screen.

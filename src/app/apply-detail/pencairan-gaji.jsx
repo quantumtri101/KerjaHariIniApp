@@ -7,21 +7,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 export default function PencairanGaji(props) {
   const [conHeight, setConHeight] = useState(0)
-  // const list = [
-  //   [
-  //     'Gaji Pokok',
-  //     props.applicationData.salary_approve_format,
-  //     'Senin, 1 Jan 2023 Pk. 09.00',
-  //     props.applicationData.is_approve_salary == 'not_yet_approved' ? 'Sedang diproses' : 'Tercairkan ' + props.applicationData.salary_sent_at,
-  //     true
-  //   ],
-  //   [
-  //     'Gaji Lemburan',
-  //     props.applicationData.additional_salary_format,
-  //     'Gaji Lemburan maih dalam tahap verifikasi',
-  //     false
-  //   ],
-  // ]
   const isFocused = useIsFocused();
   const [isExpanded, setIsExpanded] = useState(false);
 

@@ -1,26 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableNativeFeedback, TouchableOpacity, Image } from 'react-native';
-import RNFS from 'react-native-fs';
-// import { Camera, FlashMode } from 'expo-camera';
-// import { Stack, useRouter } from 'expo-router';
 import { Header, HeaderResume, } from '../../components'
 import { COLORS, SIZES } from '../../constants';
-// import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Camera, useCameraDevices, useCameraDevice, } from 'react-native-vision-camera';
 import image from '../../constants/image';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Base from "../../utils/base";
-// import * as MediaLibrary from 'expo-media-library'
 
 export default function CameraScreen(props) {
 	var base = new Base()
-  // const router = useRouter()
+  const { width, height } = Dimensions.get('window');
 	const device = useCameraDevice('back')
-  // const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  // const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);
-  // const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [flashMode, setFlashMode] = useState(false);
   const [cameraActive, setCameraActive] = useState(true);
 	const [imageBase64, setImageBase64] = useState('');
@@ -28,23 +19,8 @@ export default function CameraScreen(props) {
   const cameraRef = useRef()
 
   useEffect(() => {
-    // (async () => {
-    //   const { status } = await Camera.requestCameraPermissionsAsync();
-    //   setHasCameraPermission(status);
-    // })();
-    // (async () => {
-    //   const cameraPermission = await Camera.requestCameraPermissionsAsync();
-    //   const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
-    //   setHasCameraPermission(cameraPermission.status === "granted");
-    //   setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
-    // })();
-
-
 		initPermission()
     setCameraActive(true)
-
-		// if(props.route.params.reviewResume)
-		// 	AsyncStorage.setItem('lastResumePage', 'KTPCamera')
   }, []);
 
   async function initPermission(){
@@ -60,10 +36,8 @@ export default function CameraScreen(props) {
       const file = await cameraRef.current.takePhoto({
 				flash: flashMode ? 'on' : 'off',
 			});
-			// const response = await RNFS.readFile(`file://${file.path}`, 'base64')
       
       setCapturedPhoto(file);
-			// setImageBase64(await base.toDataURLPromise('file://' + file.path))
     }
   };
 
@@ -73,7 +47,6 @@ export default function CameraScreen(props) {
 	}
 
   const confirmCapture = async () => {
-    // const asset = await MediaLibrary.createAssetAsync(capturedPhoto.uri)
     if(props.route.params.reviewResume != null || props.route.params.editResume != null){
       if(props.route.params.reviewResume)
         await AsyncStorage.setItem("id_image", 'file://' + capturedPhoto.path)
@@ -87,21 +60,8 @@ export default function CameraScreen(props) {
     }
   }
 
-//   if (hasCameraPermission === null) {
-//     return <View />;
-//   }
-//
-//   if (hasCameraPermission === false) {
-//     return <Text>No access to camera</Text>;
-//   }
-
-  const { width, height } = Dimensions.get('window');
-
   return (
     <View style={styles.container}>
-      {/* <Stack.Screen
-        options={{ header: () => null }}
-      /> */}
 			<View style={{ flexDirection: 'row', }}>
       	<Header backButton title={'KTP'} style={{ flex: 1, }} navigation={props.navigation}/>
 			</View>
@@ -172,7 +132,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   camera: {
-    // flex: 1,
 		position: 'absolute',
     width: '100%',
     height: '100%',
@@ -180,7 +139,6 @@ const styles = StyleSheet.create({
   captureButton: {
     width: 60,
     height: 60,
-    // backgroundColor: 'white',
     borderRadius: 100,
     borderWidth: 3,
     borderColor: 'white',

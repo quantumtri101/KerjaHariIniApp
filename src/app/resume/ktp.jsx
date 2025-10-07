@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View, Image } from 'react-native'
 import React, { useEffect } from 'react'
-// import { Stack, useRouter } from 'expo-router'
 import Header from '../../components/common/header/header'
 import { COLORS, FONTSTYLES, SIZES, FONTS, } from '../../constants'
 import { Button, HeaderResume, } from '../../components'
@@ -8,8 +7,6 @@ import {png_resumeKtp } from '../../assets'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function KTP(props) {
-	// const router = useRouter()
-
 	useEffect(() => {
 		if(props.route.params.reviewResume == null)
 			AsyncStorage.setItem('lastResumePage', 'KTP')
@@ -21,19 +18,11 @@ export default function KTP(props) {
 	}
 
 	function onNextAction(){
-		// if(props.route.params.reviewResume)
-			props.navigation.navigate('Resume', {screen : 'KtpCamera', params: {editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, onGoBack: () => onGoBack(), }, })
-		// else
-		// 	props.navigation.navigate('Resume', {screen : 'KtpCamera', params: { editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, onGoBack: () => onGoBack(), }, })
+		props.navigation.navigate('Resume', {screen : 'KtpCamera', params: {editResume: props.route.params.editResume, reviewResume: props.route.params.reviewResume, onGoBack: () => onGoBack(), }, })
 	}
 
 	return (
-		<>
-			{/* <Stack.Screen
-				options={{
-					header: () => null
-				}}
-			/> */}
+		<View>
 			<View style={{ backgroundColor: 'white' }}>
 				<Header backButton title={'Pengisian Resume'} navigation={props.navigation}/>
 			</View>
@@ -50,7 +39,7 @@ export default function KTP(props) {
 			<View style={{ padding: 16, backgroundColor: COLORS.white }}>
 				<Button title={'Lanjut'} style={{ height: 30 }} onPress={() => onNextAction()} />
 			</View>
-		</>
+		</View>
 	)
 }
 
@@ -74,10 +63,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: SIZES.xLarge
-	},
-	svg: {
-		// width:'100%',
-		// aspectRatio: 3/2
 	},
 	title: {
 		fontFamily: FONTS.semibold,

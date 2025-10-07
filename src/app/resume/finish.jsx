@@ -1,11 +1,9 @@
 import React, {useEffect, } from 'react'
-// import { Stack, useRouter } from 'expo-router'
 import { StartFinish } from '../../components'
 import { svg_resumeSuccess } from '../../assets'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function ResumeFinish(props) {
-  // const router = useRouter()
   const title = 'Resume anda telah tersimpan'
   const subtitle = 'Resume akan dikirimkan saat Anda melakukan lamaran Pekerjaan.'
 
@@ -25,7 +23,6 @@ export default function ResumeFinish(props) {
       AsyncStorage.removeItem("arrNextPage")
 
 		props.navigation.replace(nextPage.id != null ? nextPage.route : (flag ? 'Home' : 'Quiz'), {screen : nextPage.id != null ? nextPage.screen : (flag ? 'HomeTab' : 'QuizStart'), params: {}, })
-    // router.push('/quiz/start')
   }
 
 	useEffect(() => {
@@ -34,7 +31,6 @@ export default function ResumeFinish(props) {
 
   return (
     <>
-      {/* <Stack.Screen options={{header: () => null}} /> */}
       <StartFinish
         svg={svg_resumeSuccess}
         title={title}

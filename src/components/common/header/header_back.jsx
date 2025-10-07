@@ -1,15 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
 import { COLORS, FONTS, FONTSTYLES, images, SIZES } from '../../../constants'
 import React, { useEffect } from 'react'
-// import { FontAwesome5 } from '@expo/vector-icons'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-// import { LocalSvg } from 'react-native-svg'
-import { notification } from '../../../assets'
-// import { useRouter } from 'expo-router'
-import useFetch from '../../../hook/useFetch'
 import Base from '../../../utils/base'
-// import { MaterialCommunityIcons } from '@expo/vector-icons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function HeaderBack(props) {

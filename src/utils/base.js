@@ -10,8 +10,8 @@ import NetInfo from "@react-native-community/netinfo";
 
 export default class Base extends Component {
 
-	// host = 'https://kerjahariini.id'
-	host = 'https://casual-admin.quantumtri.com'
+	host = 'https://kerjahariini.id'
+	// host = 'https://casual-admin.quantumtri.com'
 	url = this.host + '/api';
 	url_image = this.host + '/image';
 	url_socket = this.host + ':6006';

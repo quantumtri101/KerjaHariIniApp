@@ -10,13 +10,10 @@ import {
 } from "react-native";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import React, { useState, useEffect, useCallback } from "react";
-// import { Stack, useRouter } from "expo-router";
 import { COLORS, SIZES } from "../../constants";
 import { Button, Header, TextField, HeaderBack, } from "../../components/common";
-// import { MaterialIcons } from "@expo/vector-icons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import useFetch from "../../hook/useFetch";
-// import * as ImagePicker from "expo-image-picker";
 import moment from "moment";
 import "moment/locale/id";
 import { LocalSvg } from "react-native-svg/css";
@@ -30,8 +27,6 @@ export default function MyProfile(props) {
   const [phone, setPhone] = useState();
   const [image, setImage] = useState(null);
   const [apiImage, setApiImage] = useState(null);
-
-  // const router = useRouter();
 
   const getProfile = useFetch("GET", "auth/profile", "");
   const postProfile = useFetch(
@@ -47,7 +42,6 @@ export default function MyProfile(props) {
   );
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await launchImageLibrary({
       includeBase64: true,
     });
@@ -86,16 +80,12 @@ export default function MyProfile(props) {
   }, [getProfile.isLoading]);
 
   return (
-    <>
-      {/* <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-      /> */}
+    <View>
       <View style={{ backgroundColor: "white" }}>
         <Header backButton title={"Profil"} navigation={props.navigation}/>
       </View>
-      {getProfile.isLoading ? (
+      {
+        getProfile.isLoading ?
         <View
           style={{
             flex: 1,
@@ -106,8 +96,8 @@ export default function MyProfile(props) {
         >
           <ActivityIndicator size={"large"} color={COLORS.primary} />
         </View>
-      ) : (
-        <>
+        :
+        <View>
           <ScrollView
             style={{
               backgroundColor: "white",
@@ -196,9 +186,9 @@ export default function MyProfile(props) {
               <Button title={"Simpan"} onPress={handleButton} />
             )}
           </View>
-        </>
-      )}
-    </>
+        </View>
+      }
+    </View>
   );
 }
 
@@ -212,7 +202,6 @@ const styles = StyleSheet.create({
   avatarContainer: {
     width: SIZES.xSmall * 10,
     height: SIZES.xSmall * 10,
-    // backgroundColor: COLORS.primary,
     borderRadius: SIZES.xSmall * 10,
   },
   changeAvatarTouchable: {

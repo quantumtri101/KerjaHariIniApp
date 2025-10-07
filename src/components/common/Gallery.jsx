@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Image, FlatList, TouchableOpacity, Text, Modal, StyleSheet, Dimensions } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
-// import {MaterialCommunityIcons} from '@expo/vector-icons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { COLORS, FONTSTYLES, SIZES } from '../../constants';
 
@@ -17,18 +16,6 @@ const GalleryComponent = ({ images }) => {
   const closeModal = () => {
     setSelectedImageIndex(null);
     setIsModalVisible(false);
-  };
-
-  const goToPreviousImage = () => {
-    if (selectedImageIndex > 0) {
-      setSelectedImageIndex(selectedImageIndex - 1);
-    }
-  };
-
-  const goToNextImage = () => {
-    if (selectedImageIndex < images.length - 1) {
-      setSelectedImageIndex(selectedImageIndex + 1);
-    }
   };
 
   const renderGalleryItem = ({ item, index }) => {
@@ -58,16 +45,11 @@ const GalleryComponent = ({ images }) => {
   const scrollRef = useRef();
   const next = (dataLength) => {
     const currentIndex = scrollRef.current.getCurrentIndex()
-    // console.log(currentIndex)
-    currentIndex == dataLength - 1 ?
-    scrollRef.current.goToFirstIndex()
-    :
-    scrollRef.current.scrollToIndex({index : currentIndex + 1});
+    currentIndex == dataLength - 1 ? scrollRef.current.goToFirstIndex() : scrollRef.current.scrollToIndex({index : currentIndex + 1})
   };
 
   const prev = (dataLength) => {
     const currentIndex = scrollRef.current.getCurrentIndex()
-    // console.log(currentIndex)
     currentIndex == 0 ?
     scrollRef.current.goToLastIndex()
     :
@@ -90,19 +72,15 @@ const GalleryComponent = ({ images }) => {
         <View style={styles.modalContainer} >
           <TouchableOpacity style={styles.modalCloseButton} onPress={closeModal}>
             <MaterialCommunityIcons name={'close-circle'} size={32} color={'white'} />
-            {/* <Text style={styles.modalCloseButtonText}>Close</Text> */}
           </TouchableOpacity>
 
           {selectedImageIndex !== null && (
             <View style={styles.modalImageContainer}>
               <TouchableOpacity style={styles.modalPreviousButton} onPress={() => prev(images.length)}>
                 <MaterialCommunityIcons name={'chevron-left'} size={48} color={'white'} />
-                {/* <Text style={styles.modalNavigationButtonText}>{'<'}</Text> */}
               </TouchableOpacity>
 
               <SwiperFlatList
-                // autoplay
-                // autoplayDelay={2}
                 autoplayLoop
                 ref={scrollRef}
                 index={selectedImageIndex}
@@ -114,9 +92,7 @@ const GalleryComponent = ({ images }) => {
                       source={{uri: item}}
                       style={styles.modalImage}
                       resizeMode="center"
-                      // onTouchEnd={closeModal}
                     />
-                    {/* <Text style={styles.text}>{item}</Text> */}
                   </View>
                 )}
               />
@@ -124,7 +100,6 @@ const GalleryComponent = ({ images }) => {
 
               <TouchableOpacity style={styles.modalNextButton} onPress={() => next(images.length)}>
                 <MaterialCommunityIcons name={'chevron-right'} size={48} color={'white'} />
-                {/* <Text style={styles.modalNavigationButtonText}>{'>'}</Text> */}
               </TouchableOpacity>
             </View>
           )}
@@ -136,11 +111,8 @@ const GalleryComponent = ({ images }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
   },
   flatListContainer: {
-    // paddingVertical: 20,
-    // paddingHorizontal: 10,
     marginHorizontal: -5
   },
   imageContainer: {
@@ -185,7 +157,6 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 99,
     padding: 16,
-    // backgroundColor: 'red'
   },
   modalCloseButtonText: {
     color: 'white',
@@ -201,18 +172,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     height: '100%',
-    // backgroundColor: 'red',
-    // top: '45%',
     left: 0,
     zIndex: 1,
   },
   modalNextButton: {
     position: 'absolute',
-    // top: '47%',
     justifyContent: 'center',
     padding: 16,
     height: '100%',
-    // backgroundColor: 'red',
     right: 0,
     zIndex: 1,
   },
@@ -224,13 +191,8 @@ const styles = StyleSheet.create({
   modalImage: {
     flex: 1,
     width: Dimensions.get('window').width,
-    // height: Dimensions.get('window').height,
-    // aspectRatio:
-    // height: 200,
-    // borderRadius: 10,
   },
   empty: {
-    // ...FONTSTYLES.p_black_12,
     ...FONTSTYLES.reg10_7373,
     paddingHorizontal: SIZES.xSmall / 2
   }

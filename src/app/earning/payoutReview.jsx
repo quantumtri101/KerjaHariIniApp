@@ -1,18 +1,14 @@
 import { Image, StyleSheet, Text, View, ScrollView, FlatList, ActivityIndicator } from 'react-native'
 import React, { useEffect } from 'react'
-// import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
 import { Button, Header } from '../../components'
 import Base from '../../utils/base'
-// import { FontAwesome5 } from '@expo/vector-icons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { formatCurrency } from '../../utils'
 import useFetch from '../../hook/useFetch'
 
 export default function PayoutReview(props){
   var base = new Base()
-  // const router = useRouter()
-  // const { amount } = useLocalSearchParams()
   const getResume = useFetch('GET', 'resume', {})
   const getBank = useFetch('GET', 'bank?id=' + getResume.data.data?.bank_id, {}, false)
   const postRequestWithdraw = useFetch('POST', 'request-withdraw', {
@@ -31,7 +27,6 @@ export default function PayoutReview(props){
     if(postRequestWithdraw.data.status != null){
       if (postRequestWithdraw.data.status == 'success') {
         props.navigation.navigate('Earning', {screen: 'Processing', params: {}})
-        // router.push('/earning/processing')
       }
       else
         base.alertSnackbar(postRequestWithdraw.data.message)
@@ -40,11 +35,6 @@ export default function PayoutReview(props){
 
   return (
     <View style={{ flex: 1, }}>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Request Penarikan'} navigation={props.navigation}/>
       </View>

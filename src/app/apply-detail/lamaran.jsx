@@ -2,7 +2,6 @@ import { Pressable, StyleSheet, Text, TouchableNativeFeedback, TouchableOpacity,
 import React, { useEffect, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native';
 import { COLORS, FONTSTYLES, SIZES } from '../../constants';
-// import { MaterialIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,7 +11,6 @@ import 'moment/locale/id'
 
 export default function Lamaran(props) {
   const [conHeight, setConHeight] = useState(0)
-  // const getCheckLog = useFetch('GET', 'check-log?jobs_id=JOBS1_20230828_000003', {})
   const resumeItem = [
     { icon: 'file', title: 'CV Anda', status: props.applicationData.resume_id, },
     { icon: 'file', title: 'Surat Lamaran', status: props.applicationData.content, },

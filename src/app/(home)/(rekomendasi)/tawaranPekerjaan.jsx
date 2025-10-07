@@ -4,13 +4,11 @@ import moment from 'moment'
 
 import { Card, Skeleton } from '../../../components';
 import { COLORS, FONTSTYLES, SIZES } from '../../../constants';
-// import { useRouter } from 'expo-router';
 import useFetch from '../../../hook/useFetch';
 import Base from "../../../utils/base";
 
 export default function TawaranPekerjaan(props) {
   var base = new Base()
-  // const router = useRouter()
   const getRecommendation = useFetch('GET', 'jobs?api_type=offering&is_live_app=1&is_approve=1', {})
   const [arrJobs, setArrJobs] = useState([]);
 

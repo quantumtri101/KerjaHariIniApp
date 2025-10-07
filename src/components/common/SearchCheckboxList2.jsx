@@ -1,7 +1,6 @@
 import { View, Pressable, Text, TextInput, FlatList, StyleSheet, TouchableNativeFeedback, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { COLORS, FONTSTYLES, SIZES } from "../../constants";
-// import Icon from '@expo/vector-icons/MaterialIcons'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TextField from "./TextField";
 
@@ -72,12 +71,9 @@ const SearchCheckboxList2 = ({inputData, arrSelectedData}) => {
         ListHeaderComponent={
           <TextField
             search
-            // style={styles.searchInput}
             placeholder="Cari"
             value={searchText}
             onChangeText={(value) => setSearchText(value)}
-            // onChangeText={handleSearch}
-            // onEndEditing={(value) => handleSearch(value)}
             containerStyle={{ backgroundColor: 'white' }}
           />
         }
@@ -103,8 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   itemSvgContainer: {
-    // flex: 1,
-    // padding: SIZES.xLarge,
     minWidth: 130,
     minHeight: 130,
     alignItems: 'center',

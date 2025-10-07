@@ -1,10 +1,7 @@
 import { Image, StyleSheet, Text, View, ScrollView, FlatList } from 'react-native'
 import React from 'react'
-// import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
 import { Button, Header } from '../../components'
-// import { FontAwesome5 } from '@expo/vector-icons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { formatCurrency } from '../../utils'
 import useFetch from '../../hook/useFetch'
@@ -13,18 +10,9 @@ import 'moment/locale/id'
 
 
 export default function EarningIndex(props) {
-
-  // const router = useRouter()
-  // const { user_id, salary_balance } = useLocalSearchParams()
-  // const getSalaryTransaction = useFetch('GET', 'transaction/salary?user_id=' + user_id, {})
   const getSalaryTransaction = useFetch('GET', 'transaction/salary', {})
 
   const ItemList = ({ item }) => {
-
-    // const getJobsName = () => {
-    //   const getJobs = useFetch('GET', 'jobs?id=' + item.description.substr(20, 21), {})
-    //   return (getJobs.data.data?.name == null ? '' : getJobs.data.data?.name)
-    // }
 
     return (
       <View style={{ gap: 5 }}>
@@ -51,11 +39,6 @@ export default function EarningIndex(props) {
 
   return (
     <View style={{ flex: 1, }}>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton navigation={props.navigation} title={'Akumulasi Gaji'} />
       </View>

@@ -1,14 +1,10 @@
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Pressable, TouchableNativeFeedback, Modal } from 'react-native'
 import React, { Component, forwardRef, useEffect, useRef, useState } from 'react'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
-// import Icon from '@expo/vector-icons/MaterialIcons'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Picker } from '@react-native-picker/picker'
-import { color } from 'react-native-reanimated'
 
 import PickerModal from './PickerModal';
 
-// export default class TextField extends Component {
 const TextField = forwardRef(({
   containerStyle,
   editable,
@@ -41,7 +37,6 @@ const TextField = forwardRef(({
 
   const [focus, setFocus] = useState(false)
   const [showPicker, setShowPicker] = useState(false)
-  // const [value, setValue] = useState('')
   const [visibility, setVisibility] = useState(false)
   const [pickerState, setPickerState] = useState(preSelected == null ? null : preSelected)
   const [pickerStateLabel, setPickerStateLabel] = useState(preSelectedLabel == null ? null : preSelectedLabel)
@@ -62,21 +57,8 @@ const TextField = forwardRef(({
 	}, [pickerState, pickerData, ])
 
   function open() {
-    // pickerRef.current.focus();
     setFocus(true)
     setShowPicker(true)
-  }
-
-  function onPickerValueChange(itemValue) {
-    setPickerState(itemValue)
-    const obj = pickerData.filter(item => item['id'] == itemValue)
-    obj.map((key, value) => setPickerStateLabel(key['name']))
-
-		value(itemValue)
-  }
-
-  function close() {
-    pickerRef.current.blur();
   }
 
   function onOptionClicked(selected){
@@ -90,10 +72,6 @@ const TextField = forwardRef(({
     setFocus(false)
     onBlur()
   }
-
-  // useEffect(() => {
-  //   // value(pickerState)
-  // }, [pickerState])
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -126,18 +104,6 @@ const TextField = forwardRef(({
             arr_option={pickerData}
             onModalClosed={() => setShowPicker(false)}
             onOptionClicked={(selected) => onOptionClicked(selected)}/>
-          {/* <Picker
-            ref={pickerRef}
-            selectedValue={pickerState}
-            onValueChange={(itemValue) => onPickerValueChange(itemValue)}
-            onBlur={() => setFocus(false)}
-            mode='dropdown'
-            enabled={editable}>
-            <Picker.Item label={`-` + placeholder + `-`} enabled={false} />
-            {pickerData?.map((item, index) => (
-              <Picker.Item label={item.name} value={item.id} key={index} />
-            ))}
-          </Picker> */}
           
         </View>
         :
@@ -175,9 +141,6 @@ const TextField = forwardRef(({
             placeholder={placeholder}
             returnKeyType={(returnKeyType == null ? 'next' : returnKeyType)}
             style={[
-              // styles.TextField,
-              // this.state.focus ? styles._focus : null,
-              // props.error_type !== props.type_input ? styles._error : null,
               multiline && { textAlignVertical: 'top' },
               { flex: 1, color: COLORS.black_12, },
             ]}
@@ -214,8 +177,6 @@ const styles = StyleSheet.create({
     marginBottom: SIZES.small
   },
   TextField: {
-    // flex: 1,
-    // ...FONTSTYLES.TextField,
     paddingHorizontal: SIZES.small,
     paddingVertical: Platform.OS == 'ios' ? SIZES.xSmall : 0,
     borderWidth: 1,
@@ -223,7 +184,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     backgroundColor: COLORS.white,
     overflow: 'hidden',
-    // minHeight: 48
   },
   _search: {
     borderColor: COLORS.lightWhite2
@@ -245,14 +205,11 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     position: 'absolute',
     right: 0,
-    // backgroundColor: 'red',
     padding: 16,
     borderLeftWidth: 1,
     borderColor: COLORS.gray
   },
   pickerText: {
-    // ...FONTSTYLES.TextField,
-    // fontSize: SIZES.medium,
     flex: 1, paddingHorizontal: SIZES.medium, 
     paddingVertical: SIZES.small,
     color: COLORS.gray

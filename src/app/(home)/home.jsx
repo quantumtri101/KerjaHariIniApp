@@ -15,33 +15,16 @@ import Header from "../../components/common/header/header";
 import { avataaars, avatar_new, svg_avatar } from "../../assets";
 import { Alert, HomeBanner, Skeleton } from "../../components";
 import { useSafeAreaInsets, SafeAreaView, } from "react-native-safe-area-context";
-import Geolocation from '@react-native-community/geolocation';
 import Card from "../../components/common/Card";
-// import { useRouter } from "expo-router";
 import moment from "moment";
 import useFetch from "../../hook/useFetch";
 import Base from "../../utils/base";
 import { TouchableOpacity } from "react-native-gesture-handler";
-// import { MaterialIcons } from "@expo/vector-icons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import "moment/locale/id";
 import { LocalSvg } from "react-native-svg/css";
 
-// import * as Device from "expo-device";
-// import * as Notifications from 'expo-notifications';
-// import Constants from "expo-constants";
-// import { fcmGetToken } from "../../hook/getDeviceToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-// import { registerForExpoPushNotificationsAsync, registerForPushNotificationsAsync } from '../../hook/getDeviceToken'
-
-// const { status } = await Notifications.requestPermissionsAsync();
-// if (status !== 'granted') {
-//   alert('You need to enable permissions in order to receive notifications');
-//   return;
-// }
-
-// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 
 export default function Home(props) {
 	var base = new Base()
@@ -58,7 +41,6 @@ export default function Home(props) {
     false
   );
   const insets = useSafeAreaInsets();
-  // const router = useRouter();
   const getProfile = useFetch("GET", "auth/profile", {});
   const getBanner = useFetch("GET", "banner?is_publish=1", {});
 
@@ -70,23 +52,6 @@ export default function Home(props) {
   const notificationListener = useRef();
   const responseListener = useRef();
   const [message, setMessage] = useState();
-
-  const postNotification = useFetch(
-    "POST",
-    "communication/test-send",
-    message,
-    false
-  );
-
-  // useEffect(() => {
-  //   console.log('UEF', postNotification.data)
-  // }, [postNotification.data])
-
-  // useEffect(() => {
-  //   if (message != null) {
-  //     postNotification.fetchData()
-  //   }
-  // }, [message])
 
 	useEffect(() => {
     if(getJobs.data.status != null){
@@ -128,7 +93,6 @@ export default function Home(props) {
     const notifRedirect = await AsyncStorage.getItem("notifRedirect");
     if (notifRedirect) {
 			props.navigation.navigate(notifRedirect)
-      // router.push(notifRedirect);
       await AsyncStorage.removeItem("notifRedirect");
     }
 		else{
@@ -149,25 +113,6 @@ export default function Home(props) {
 
   useEffect(() => {
 		redirect();
-
-    // fcmGetToken().then((token) => setPushToken(JSON.stringify(token)));
-
-    // registerForPushNotificationsAsync().then(token => setPushToken(token)).catch(error => console.log(error));
-    // registerForExpoPushNotificationsAsync().then(token => setExpoPushToken(token)).catch(error => console.log(error));
-
-    // notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-    //   setNotification(notification);
-    // });
-
-    // responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-    //   // console.log(response);
-    //   router.replace('/profile')
-    // });
-
-    // return () => {
-    // Notifications.removeNotificationSubscription(notificationListener.current);
-    // Notifications.removeNotificationSubscription(responseListener.current);
-    // };
   }, []);
 
   return (

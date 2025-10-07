@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Success = ({text, onPress}) => {

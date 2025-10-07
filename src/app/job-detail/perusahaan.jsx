@@ -10,25 +10,14 @@ import {
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { COLORS, FONTSTYLES, SIZES } from "../../constants";
-// import { MaterialIcons } from "@expo/vector-icons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import GalleryComponent from "../../components/common/Gallery";
 import { Skeleton } from "../../components/common/";
 
-import Avatar from "../../assets/png/avatar_new.png";
-import Logo from "../../assets/header/logo.png";
-import Jpg from "../../assets/jpg/test-image.jpg";
-import { LIPSUM } from "../../constants/theme";
 import Base from "../../utils/base";
 
 export default function Perusahaan({ onStateChange, data, isLoading, navigation, }) {
 	var base = new Base()
-  // const images = [
-  //   // Avatar,
-  //   // Logo,
-  //   // Jpg,
-  //   // base.host + '/image/company?file_name='+data?.company.file_name
-  // ];
 
   const [images, setImages] = useState([]);
 
@@ -60,10 +49,6 @@ export default function Perusahaan({ onStateChange, data, isLoading, navigation,
       arr.push(image.image_url)
     setImages(arr)
   }, []);
-
-  // useEffect(() => {
-  //   console.log('IMAGES', images)
-  // }, [images])
 
 	if(isFocused)
   return (

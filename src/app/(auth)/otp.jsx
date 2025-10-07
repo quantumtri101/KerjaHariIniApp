@@ -20,11 +20,7 @@ import useFetch from "../../hook/useFetch";
 import Base from "../../utils/base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import firebase from "@react-native-firebase/app";
-// import auth from "@react-native-firebase/auth";
 import moment from 'moment';
-// import { FirebaseRecaptcha, FirebaseRecaptchaVerifier, FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha'
-// import { firebaseConfig } from '../../firebaseConfig'
-// import firebase from 'firebase/compat/app'
 
 export default function OTPScreen(props) {
 	var base = new Base()
@@ -45,43 +41,15 @@ export default function OTPScreen(props) {
 	// verification code (OTP - One-Time-Passcode)
 	const [code, setCode] = useState("");
 
-	// Handle login
-	function onAuthStateChanged(user) {
-		if (user) {
-			try {
-				setAuthStateLoading(true);
-				// auth()
-				// 	.signOut()
-				// 	.then(() => confirmOtp.setRefetch({
-				// 		phone: props.route.params.phone != null ? props.route.params.phone : phoneNumber,
-				// 	}));
-			} catch (error) {
-				console.log("onAuthStateChanged Error", error);
-			} finally {
-				setAuthStateLoading(false);
-			}
-		}
-	}
-
 	const sendVerification = async () => {
-		// try {
-			setAuthStateLoading(true);
-		// 	console.log(phoneNumber)
-			// const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-			// setConfirm(confirmation);
-			sendOTP.setRefetch({
-				phone: phoneNumber,
-			})
-			setCodeSent(true);
-			
-			setAuthStateLoading(false);
-			setCountdown(true);
-		// } catch (error) {
-		// 	console.log("sendVerification Error", error);
-		// } finally {
-		// 	setAuthStateLoading(false);
-		// 	setCountdown(true);
-		// }
+		setAuthStateLoading(true);
+		sendOTP.setRefetch({
+			phone: phoneNumber,
+		})
+		setCodeSent(true);
+		
+		setAuthStateLoading(false);
+		setCountdown(true);
 	};
 
 	const confirmCode = async () => {
@@ -112,9 +80,6 @@ export default function OTPScreen(props) {
 	const confirmOtp = useFetch("POST", "auth/otp/confirm", {}, false);
 	const sendOTP = useFetch("POST", "auth/otp/send", {}, false);
 
-	// const router = useRouter();
-	// const { prev, tmp_pass } = useLocalSearchParams();
-
 	const OTP = [];
 	const ti = [];
 
@@ -138,7 +103,6 @@ export default function OTPScreen(props) {
 	ti[5] = useRef();
 
 	useEffect(() => {
-		// getToken()
 		if(props.route.params != null && props.route.params.phone != null)
 			setPhoneNumber(props.route.params.phone)
 		else
@@ -151,9 +115,6 @@ export default function OTPScreen(props) {
 		return () => {
 			AsyncStorage.removeItem('lastAuthPage')
 		}
-
-		// const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-		// return subscriber;
 	}, []);
 
 	useEffect(() => {
@@ -197,7 +158,6 @@ export default function OTPScreen(props) {
 		if(confirmOtp.data.status != null){
 			setAuthStateLoading(false)
 			if (confirmOtp.data.status == "success") {
-				// await auth().signOut()
 
 				var tempToken = await AsyncStorage.getItem('tempToken')
 				if(tempToken != null){
@@ -254,7 +214,6 @@ export default function OTPScreen(props) {
 	const modalButton = () => {
 		setModalVisible(false);
 		props.navigation.replace('FormRekomendasi', {screen : 'Start', params: {}, })
-		// router.push("/form-rekomendasi/start");
 	};
 
 	const CountdownTimer = (props) => {
@@ -285,31 +244,7 @@ export default function OTPScreen(props) {
 		);
 	};
 
-	const getToken = async () => {
-		let a = await AsyncStorage.getItem("token");
-		// return a
-	};
-
-	const getLastRequirementPage = async () => {
-		const lastRequirementPage = await AsyncStorage.getItem("lastRequirementPage");
-		// console.log(a);
-		return lastRequirementPage;
-	};
-
-	const handleVerified = async () => {
-		if (
-			Object.is(ti_0, "") ||
-			Object.is(ti_1, "") ||
-			Object.is(ti_2, "") ||
-			Object.is(ti_3, "") ||
-			Object.is(ti_4, "") ||
-			Object.is(ti_5, "")
-		) {
-			ToastAndroid.show("Can't be null", ToastAndroid.SHORT);
-		} else {
-			confirmOtp.refetch();
-		}
-	};
+	
 	function onUpdateTime(time){
 		// console.log(time)
 		setCountdown(time != -1)

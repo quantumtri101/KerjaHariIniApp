@@ -11,9 +11,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { Button, Header, Skeleton } from "../../components";
 import { COLORS, FONTS, FONTSTYLES, SIZES } from "../../constants";
-// import { Stack, useRouter } from "expo-router";
-import { LocalSvg } from "react-native-svg/cws";
-// import Icon from "@expo/vector-icons/MaterialIcons";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { svg_courier, svg_hospitality } from "../../assets";
 import useFetch from "../../hook/useFetch";
@@ -23,7 +20,6 @@ import moment from "moment";
 import "moment/locale/id";
 
 export default function FormRekomendasiCategory(props) {
-  // const router = useRouter();
 	var base = new Base()
 
   const { data, isLoading, error, refetch, fetchData } = useFetch(
@@ -58,7 +54,6 @@ export default function FormRekomendasiCategory(props) {
     else {
       await AsyncStorage.setItem("category", JSON.stringify(category));
 			props.navigation.navigate('FormRekomendasi', {screen : 'Position', params: {category: category.id, }, })
-      // router.push("/form-rekomendasi/position?category=" + category.id);
     }
   };
   const skeleton = [];
@@ -152,19 +147,20 @@ export default function FormRekomendasiCategory(props) {
         </View>
       </ScrollView>
       <View style={{ padding: SIZES.medium, backgroundColor: "white" }}>
-        {isLoading ? (
-          <ActivityIndicator
-            size={"large"}
-            style={{ marginTop: SIZES.large }}
-            color={COLORS.primary}
-          />
-        ) : (
-          <Button
-            title={"Mulai"}
-            onPress={() => handleButton()}
-            disable={category == "" ? true : false}
-          />
-        )}
+        {
+          isLoading ?
+            <ActivityIndicator
+              size={"large"}
+              style={{ marginTop: SIZES.large }}
+              color={COLORS.primary}
+            />
+          :
+            <Button
+              title={"Mulai"}
+              onPress={() => handleButton()}
+              disable={category == "" ? true : false}
+            />
+        }
       </View>
     </View>
   );
@@ -176,8 +172,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   itemSvgContainer: {
-    // flex: 1,
-    // padding: SIZES.xLarge,
     minWidth: 130,
     minHeight: 130,
     alignItems: "center",

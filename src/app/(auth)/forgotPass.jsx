@@ -10,7 +10,6 @@ import Check_TextField_Phone from '../../utils'
 import Header from '../../components/common/header/header'
 
 export default function ForgotPass(props) {
-  // const router = useRouter()
   const [modalVisible, setModalVisible] = useState(false)
   const [isPhoneError, setIsPhoneError] = useState(false)
   const [isPhoneErrorMessage, setIsPhoneErrorMessage] = useState(false)
@@ -18,20 +17,11 @@ export default function ForgotPass(props) {
   const modalButton = () =>{
     setModalVisible(false)
 		props.navigation.replace('Auth', {screen : 'Login', })
-    // router.push('login')
   }
 
   const { data, isLoading, error, refetch, setRefetch } = useFetch("POST", "auth/forget-password", {
     phone: phone,
   }, false);
-
-  const checkFieldPhone = () => {
-    let phoneCheck = Check_TextField_Phone(phone)
-    phoneCheck != null ? (
-      setIsPhoneError(true) &
-      setIsPhoneErrorMessage(phoneCheck)
-    ):setIsPhoneError(false)
-  }
 
   const handleForgotPass = async () => {
     if(phone == '')
@@ -42,9 +32,7 @@ export default function ForgotPass(props) {
 
   useEffect(() => {
     if(data.status == 'success'){
-      // setModalVisible(true)
 			props.navigation.replace('Auth', {screen : 'OTPScreen', params: {prev: 'forgotPass', phone: phone, }, })
-      // router.push('otp?prev=forgotPass&tmp_pass='+data.password)
     }else if(data.status == 'error'){
       setIsPhoneError(true)
       setIsPhoneErrorMessage(data.message)
@@ -60,15 +48,6 @@ export default function ForgotPass(props) {
       	paddingVertical: SIZES.xSmall,
       	backgroundColor: COLORS.white
     	}}>
-      	{/* <Stack.Screen
-        	options={{
-          	headerShadowVisible: false,
-          	headerTitle: ''
-          	// header: () => (<Header />),
-        	}}
-      	/> */}
-
-
       	<View style={{
         	flex: 1,
 					marginTop: 20,
@@ -92,14 +71,6 @@ export default function ForgotPass(props) {
           	<Button title='Masuk' onPress={() => handleForgotPass()} style={{ marginTop: SIZES.large}} disable={phone == '' ? true : false}/>
         	}
       	</View>
-      	{/* <Modals
-        	svg={svg_confirmed}
-        	title={'Selamat!'}
-        	desc={'Password anda berhasil direset, silahkan login.'}
-        	buttonTitle={'Login'}
-        	visible={modalVisible}
-        	onPress={modalButton}
-      	/> */}
     	</ScrollView>
 		</View>
   )

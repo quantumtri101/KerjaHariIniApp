@@ -1,27 +1,14 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-// import { Stack } from 'expo-router'
 import MapView, { MapMarker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { SIZES } from '../../constants'
 import { Header } from '../../components/common'
-// import * as Location from 'expo-location'
 
 export default function LokasiKerja(props) {
   const [location, setLocation] = useState(null)
-  // const [hasLocationPermission, setHasLocationPermission] = useState(null)
-
-  useEffect(() => {
-    // const locationPermission = await Location.requestForegroundPermissionsAsync()
-		// setHasLocationPermission(locationPermission === 'granted')
-  },[])
 
   return (
     <View>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
       <View style={{ flex: 1, backgroundColor: 'white', }}>
 
 				<View style={{ zIndex: 9999, backgroundColor: 'white', }}>

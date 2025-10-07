@@ -1,25 +1,13 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform, } from 'react-native'
 import { COLORS, FONTS, FONTSTYLES, images, SIZES } from '../../../constants'
 import React, { useEffect } from 'react'
-// import { FontAwesome5 } from '@expo/vector-icons'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { LocalSvg } from 'react-native-svg/css'
 import { notification } from '../../../assets'
-// import { useRouter } from 'expo-router'
 import useFetch from '../../../hook/useFetch'
-// import { MaterialCommunityIcons } from '@expo/vector-icons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Header = ({ withNotif, noInsets, title, backButton, onBackPress, rightIcon, rightIconOnPress, navigation, style, withImage = true, }) => {
-  const insets = useSafeAreaInsets()
-  // const router = useRouter()
   const getUnreadNotification = useFetch('GET', 'notification/total-read', {})
-  // useEffect(() => {
-
-  // },[onBackPress])
-  // useEffect(() => {
-  // }, [getNotification.data])
   return (
     <View style={[
       styles.mainContainer, 
@@ -29,9 +17,7 @@ const Header = ({ withNotif, noInsets, title, backButton, onBackPress, rightIcon
       {backButton &&
         <TouchableNativeFeedback onPress={() => onBackPress != null ? onBackPress() : navigation.goBack()} style={{}}>
           <View style={styles.backButton}>
-            {/* <View style={styles.backButton}> */}
-              <MaterialCommunityIcons name={'chevron-left'} size={16} style={{ color: COLORS.black_12, }}/>
-            {/* </View> */}
+            <MaterialCommunityIcons name={'chevron-left'} size={16} style={{ color: COLORS.black_12, }}/>
           </View>
         </TouchableNativeFeedback>
       }
@@ -86,17 +72,13 @@ export default Header
 const styles = StyleSheet.create({
   mainContainer: {
     gap: SIZES.xLarge,
-    // flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
-    // justifyContent: 'flex-start',
     backgroundColor: COLORS.white,
     paddingHorizontal: SIZES.xLarge,
     paddingBottom: SIZES.small,
   },
   titleMain: {
-    // flex: 1,
-    // height: 41,
     textAlignVertical: 'center',
     color: COLORS.gray_22,
     fontFamily: FONTS.semibold,
@@ -115,10 +97,7 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     borderRadius: 18,
-    // height: 37,
-    // width: 37,
     alignItems: 'center',
     justifyContent: 'center',
-    // overflow: 'hidden'
   }
 })

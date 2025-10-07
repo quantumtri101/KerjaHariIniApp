@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native';
 import { COLORS, FONTSTYLES, SIZES } from '../../constants';
 import { Skeleton } from "../../components"
-// import { MaterialIcons } from '@expo/vector-icons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import useFetch from '../../hook/useFetch';
 
@@ -34,9 +33,7 @@ export default function InfoPekerjaan({ onStateChange, data, isLoading, navigati
   useEffect(() => {
     setWorkingArea([])
     data?.working_area.map((item, index) => (
-      // console.log('CIty_ID', item.city_id)
       setWorkingArea(prevState => [...prevState, item.city.name])
-      // getCityName(item.city_id)
     ))
   }, [data?.working_area])
 
@@ -94,7 +91,6 @@ export default function InfoPekerjaan({ onStateChange, data, isLoading, navigati
           	<View style={styles.kualifikasiItemContainer}>
             	<MaterialIcons name={'check-circle'} size={16} color={COLORS.secondary} />
             	<Text style={FONTSTYLES.reg10_7373}>
-              	{/* {data?.criteria[0].education_id} */}
               	Usia : {data?.criteria[0].min_age} - {data?.criteria[0].max_age}
             	</Text>
           	</View>

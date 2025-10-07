@@ -1,13 +1,9 @@
 import { Image, StyleSheet, Text, View, ScrollView, FlatList, Pressable } from 'react-native'
 import React from 'react'
-// import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
 import { Alert, Button, Header } from '../../components'
-import { FontAwesome5 } from '@expo/vector-icons';
-import { png_qrcode } from '../../assets'
 
 export default function BypassRecruit(props) {
-  // const router = useRouter()
   const list = [
     ['Judul Pekerjaan', 'Judul Pekerjaan'],
     ['Tanggal', 'Jumat, 1 Jan 2020'],
@@ -16,12 +12,7 @@ export default function BypassRecruit(props) {
   ]
 
   return (
-    <>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
+    <View>
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Bypass Recruiting'} navigation={props.navigation}/>
       </View>
@@ -41,7 +32,7 @@ export default function BypassRecruit(props) {
       <View style={{padding: 16, backgroundColor: 'white'}}>
         <Button title={'Kembali'} onPress={() => props.navigation.replace('Home', {screen: 'Home', params: {}})}/>
       </View>
-    </>
+    </View>
   )
 }
 

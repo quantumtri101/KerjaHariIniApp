@@ -28,11 +28,6 @@ export default function RoutesHome(props) {
 	return(
 		<IndexTab.Navigator
 			tabBarOptions={{
-				// activeTintColor: theme.colors.colorPrimary,
-				// style: {
-				// 	backgroundColor: theme.colors.gray,
-				// },
-				// inactiveTintColor : theme.colors.gray_dark,
 				labelStyle : {top : -3, fontWeight : 'bold', position : 'relative'},
 			}}
 			options={headerNavBar}>

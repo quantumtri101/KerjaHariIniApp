@@ -9,7 +9,6 @@ import {
 	View,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-// import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import Header from "../../components/common/header/header";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { COLORS, FONTSTYLES, SIZES } from "../../constants";
@@ -27,8 +26,6 @@ import {
 
 export default function Informasi01(props) {
 	var base = new Base()
-	// const router = useRouter();
-	// const { reviewResume, editResume } = useLocalSearchParams();
 	const getData = useFetch("GET", "auth/profile", {}, false);
 	const getCity = useFetch("GET", "city/all", {});
 	const getResume = useFetch("GET", "resume", {}, false);
@@ -130,9 +127,6 @@ export default function Informasi01(props) {
 	};
 
 	useEffect(() => {
-		// if(props.route.params.editResume)
-		// 	getResume.fetchData();
-
 		if(props.route.params.reviewResume){
 			handleEdit()
 		}
@@ -195,19 +189,6 @@ export default function Informasi01(props) {
 		}
 	}, [getCity.data]);
 
-	// useEffect(() => {
-	// 	if(getResume.data.status != null){
-	// 		if(getResume.data.status == 'success'){
-	// 			setAlamat(getResume.data.data?.address);
-	// 			setKota(getResume.data.data?.city.id);
-	// 			setpreSelectedLabelCity(getResume.data.data?.city.name);
-	// 			setDate(moment(getResume.data.data?.birth_date));
-	// 		}
-	// 		else
-	// 			base.alertSnackbar(getResume.data.message)
-	// 	}
-	// }, [getResume.data]);
-
 	function onCitySelected(item){
 		if(item != null){
 			setAutoCompleteSelectedItem(item)
@@ -217,11 +198,6 @@ export default function Informasi01(props) {
 
 	return (
 		<AutocompleteDropdownContextProvider>
-			{/* <Stack.Screen
-				options={{
-					header: () => null,
-				}}
-			/> */}
 			<View style={{ backgroundColor: "white" }}>
 				<Header backButton title={props.route.params.editResume ? "Edit Resume" : "Pengisian Resume"} navigation={props.navigation}/>
 			</View>

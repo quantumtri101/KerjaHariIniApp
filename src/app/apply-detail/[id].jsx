@@ -28,11 +28,9 @@ import Lamaran from "./lamaran";
 import Pekerjaan from "./pekerjaan";
 import PencairanGaji from "./pencairan-gaji";
 
-import { useIsFocused } from "@react-navigation/native";
-import { svg_sentIllustration } from "../../assets";
 import useFetch from "../../hook/useFetch";
 import moment from "moment";
-import { formatCurrency } from "../../utils";
+import momentTZ from "moment-timezone";
 import Base from "../../utils/base";
 
 const Tab = createMaterialTopTabNavigator();
@@ -45,8 +43,6 @@ export default function ApplyDetailIndex(props) {
   const [applicationData, setApplicationData] = useState({})
   const [jobsData, setJobsData] = useState({})
 
-  // const router = useRouter();
-  // const { id, status, from, urgent } = useLocalSearchParams();
   const [modalVisible, setModalVisible] = useState(false);
   const [applicationId, setApplicationId] = useState("");
 	const [shiftStartDateMoment, setShiftStartDateMoment] = useState(moment());
@@ -55,7 +51,6 @@ export default function ApplyDetailIndex(props) {
   const getApplication = useFetch("GET", "jobs/application?id=" + props.route.params.id, {});
   const getCity = useFetch("GET", "city?id=" + (applicationData.id != null ? applicationData.jobs.city_id : ''), {}, false);
   const getJobs = useFetch("GET", "jobs?id=" + (applicationData.id != null ? applicationData.jobs.id : ''), {}, false);
-  // const getCheckLog = useFetch("GET", "check-log?jobs_id=" + props.route.params.id, {});
 
   useEffect(() => {
 		if(getApplication.data.status != null){
@@ -76,6 +71,7 @@ export default function ApplyDetailIndex(props) {
         else if(getApplication.data.data.status == 'expired')
           arr.push('Lamaran', 'Pekerjaan')
         setArrAllowedTab(arr)
+        getApplication.data.data.salary_sent_at_moment = momentTZ.tz(getApplication.data.data.salary_sent_at, "Asia/Jakarta")
         setApplicationData(getApplication.data.data)
       }
       else
@@ -121,15 +117,6 @@ export default function ApplyDetailIndex(props) {
           position: "absolute",
           top: 0,
         }}/>
-
-      {/* <ScrollView
-        style={{ backgroundColor: "white", position: "relative" }}
-        stickyHeaderIndices={[0]}> */}
-        {/* <Stack.Screen
-          options={{
-            header: () => null,
-          }}
-        /> */}
 
         <View style={{ }}>
           <Header backButton title={"Detail Lamaran"} navigation={props.navigation}/>
@@ -295,7 +282,6 @@ export default function ApplyDetailIndex(props) {
 					}
 
         </View>
-      {/* </ScrollView> */}
 
       {
 				(getJobs.data.data?.interview[0]?.type == "online" && props.route.params.status == "wait" && getJobs.data.data?.interview[0]?.zoom_url != null) &&
@@ -318,14 +304,11 @@ export default function ApplyDetailIndex(props) {
             elevation: 8,
             gap: 12,
           }}>
-          {/* {status == 'working' && */}
           {
 						getApplication.data.data?.is_available_check_out &&
             <Button
               leftIcon={<MaterialCommunityIcons name="qrcode-scan" size={SIZES.medium}/>}
               title={"Check Out"}
-              // disable={() => getCheckLog.data?.data[1] != null ? true : false}
-              // disable={getApplication.data.data?.is_available_check_out == true && false}
               style={{ height: 30 }}
               onPress={() => props.navigation.navigate('ScanQR', {params: {state: 'check_out', }})}/>
           }
@@ -343,14 +326,6 @@ export default function ApplyDetailIndex(props) {
 						}/>
         </View>
       }
-
-      {/* <Modals
-        title={'Apakah Anda yakin ingin\nmenerima Tawaran?'}
-        titleSmall
-        svg={svg_sentIllustration}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-        customButton={<ModalCustomButton />} /> */}
     </View>
   );
 }

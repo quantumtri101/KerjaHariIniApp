@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Redirect, Stack, Tabs, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-// import * as Notifications from 'expo-notifications';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import messaging from "@react-native-firebase/messaging";
 import notifee, { EventType } from "@notifee/react-native";
@@ -25,9 +24,6 @@ const Layout = () => {
   const router = useRouter();
 
   const [fontsLoaded] = useFonts({
-    // DMBold : require('../assets/fonts/DMSans-Bold.ttf'),
-    // DMMedium : require('../assets/fonts/DMSans-Medium.ttf'),
-    // DMRegular : require('../assets/fonts/DMSans-Regular.ttf'),
     PpRegular: require("../assets/fonts/Poppins-Regular.ttf"),
     PpMedium: require("../assets/fonts/Poppins-Medium.ttf"),
     PpSemiBold: require("../assets/fonts/Poppins-SemiBold.ttf"),
@@ -54,12 +50,6 @@ const Layout = () => {
     );
 
     messaging().onNotificationOpenedApp((remoteMessage) => {
-      // console.log(
-      //   'Notification caused app to open from background state iyaaaaaa:',
-      //   JSON.stringify(remoteMessage.data.route),
-      // );
-      // router.push('/listLamaran')
-      // navigation.navigate(remoteMessage.data.type);
       remoteMessage.data.type == "application"
         ? router.push("listLamaran") && removeAsyncNotifRedirect()
         : remoteMessage.data.type == "jobs_offer"
@@ -104,7 +94,6 @@ const Layout = () => {
             : remoteMessage.data.type == "salary"
             ? await AsyncStorage.setItem("notifRedirect", "earning")
             : null;
-          // setInitialRouteName(remoteMessage.data.route); // e.g. "Settings"
         }
         // setLoading(false);
       });

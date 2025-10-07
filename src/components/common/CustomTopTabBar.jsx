@@ -5,14 +5,8 @@ export default function CustomTopTabBar({ state, descriptors, navigation, positi
   return (
     <View style={{ flexDirection: 'row', borderBottomColor: '#EAEAEA', borderBottomWidth: 1, marginHorizontal: SIZES.medium}}>
       {state.routes.map((route, index) => {
-        {/* console.log(route.name) */}
         const { options } = descriptors[route.key];
         const label = route.name
-          {/* options.tabBarLabel
-            !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title: route.name; */}
 
         const isFocused = state.index === index;
 
@@ -24,7 +18,6 @@ export default function CustomTopTabBar({ state, descriptors, navigation, positi
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
 						if(arrAllowedTab != null){
 							for(let tab of arrAllowedTab){
 								if(tab == route.name){
@@ -62,9 +55,6 @@ export default function CustomTopTabBar({ state, descriptors, navigation, positi
             onLongPress={onLongPress}
             style={{height: 40, flex: fill ? 1 : null}}
           >
-            {/* <Animated.Text style={{ opacity }}>
-              {label}
-            </Animated.Text> */}
             <Animated.Text style={[isFocused ? FONTSTYLES.topTabBar_Active : FONTSTYLES.topTabBar_Inactive, {flex: 1, paddingHorizontal: 10, textAlignVertical: 'center', textAlign: fill ? 'center' : 'left'}]}>
               {label}
             </Animated.Text>

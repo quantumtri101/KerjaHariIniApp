@@ -8,8 +8,6 @@ import useFetch from '../../hook/useFetch'
 import Check_TextField_Phone from '../../utils'
 
 export default function ChangePass(props) {
-  // const router = useRouter()
-  // const { tmp_pass } = useLocalSearchParams()
   const [modalVisible, setModalVisible] = useState(false)
   const [isPhoneError, setIsPhoneError] = useState(false)
   const [isPhoneErrorMessage, setIsPhoneErrorMessage] = useState(false)
@@ -31,7 +29,6 @@ export default function ChangePass(props) {
   const modalButton = () => {
     setModalVisible(false)
 		props.navigation.replace('Auth', {screen : 'Login', })
-    // router.replace('/login')
   }
 
   useEffect(() => {
@@ -53,13 +50,6 @@ export default function ChangePass(props) {
       paddingVertical: SIZES.xSmall,
       backgroundColor: COLORS.white
     }}>
-      {/* <Stack.Screen
-        options={{
-          headerShadowVisible: false,
-          headerTitle: ''
-          // header: () => (<Header />),
-        }}
-      /> */}
 			<Header />
 
       <View style={{
@@ -80,7 +70,6 @@ export default function ChangePass(props) {
           secureTextEntry
           error={isPhoneError}
           errorMessage={isPhoneErrorMessage}
-        // keyboardType='phone-pad'
         />
         {isLoading ?
           <ActivityIndicator size={'large'} color={COLORS.primary} />

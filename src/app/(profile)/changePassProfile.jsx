@@ -1,13 +1,10 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
-// import { Stack, useLocalSearchParams } from 'expo-router'
 import { Button, Header, TextField, HeaderBack } from '../../components/common'
-import { MaterialIcons } from '@expo/vector-icons'
 import useFetch from '../../hook/useFetch'
 import { COLORS, SIZES } from '../../constants'
 
 export default function ChangePassProfile(props) {
-  // const { params_id } = useLocalSearchParams()
   const [old_password, setOld_password] = useState()
   const [new_password, setNew_password] = useState()
 
@@ -35,12 +32,7 @@ export default function ChangePassProfile(props) {
   }, [postChangePass.data])
 
   return (
-    <>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
+    <View>
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Ganti Password'} navigation={props.navigation}/>
       </View>
@@ -74,7 +66,7 @@ export default function ChangePassProfile(props) {
           />
         }
       </View>
-    </>
+    </View>
   )
 }
 

@@ -1,24 +1,17 @@
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-// import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import Header from '../../components/common/header/header'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
 import { Button, TextField } from '../../components'
-// import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-// import { LinearGradient } from 'expo-linear-gradient'
-import { LIPSUM } from '../../constants/theme'
 import useFetch from '../../hook/useFetch'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import moment from 'moment'
 
 export default function QuizIndex(props) {
-  // const router = useRouter()
   const quizData = useFetch('GET', 'general-quiz/question', {}, false)
   const postQuiz = useFetch('POST', 'general-quiz/result', postAnswer)
-  // const { id, timerMinutes, timerSeconds} = useLocalSearchParams()
   const next = parseInt(props.route.params.id) + 1
   const thumbWidth = (100 / quizData.data.recordsFiltered) * parseInt(props.route.params.id)
   const [page, setPage] = useState(1)
@@ -44,7 +37,6 @@ export default function QuizIndex(props) {
       if(postQuiz.data.status == 'success'){
         AsyncStorage.removeItem('arr_quiz')
 				props.navigation.navigate('Quiz', {screen : 'QuizFinish', })
-        // router.replace('/quiz/finish')
       }else
         console.log('Fetch Error :', postQuiz.data?.message)
     }
@@ -107,16 +99,10 @@ export default function QuizIndex(props) {
       submitAnswer()
     else
       setPage(page + 1)
-			// props.navigation.replace('Quiz', {screen : 'QuizPage', params: {id: next, timerSeconds: timerMoment.as('seconds'), }, })
   }
 
   return (
-    <>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
+    <View>
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'General Quiz'} navigation={props.navigation}/>
       </View>
@@ -180,8 +166,8 @@ export default function QuizIndex(props) {
 				<View style={{ flex: 1, alignItems: 'center', backgroundColor: COLORS.white }}>
 					<ActivityIndicator size={'large'} color={COLORS.primary} />
 				</View>
-     }
-    </>
+      }
+    </View>
   )
 }
 

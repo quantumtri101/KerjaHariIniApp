@@ -11,18 +11,9 @@ import {
 	RefreshControl,
 } from "react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import RNFS from 'react-native-fs';
-// import {
-// 	Stack,
-// 	useFocusEffect,
-// 	useLocalSearchParams,
-// 	useLocalSearchstate,
-// 	useRouter,
-// } from "expo-router";
 import Header from "../../components/common/header/header";
 import { COLORS, FONTSTYLES, SIZES, FONTS } from "../../constants";
 import { Button, CheckBox, HeaderResume, } from "../../components";
-// import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -31,9 +22,6 @@ import useFetch from "../../hook/useFetch";
 import moment from "moment";
 import skill from "./skill";
 import Base from "../../utils/base";
-// import * as MediaLibrary from "expo-media-library";
-// import * as FileSystem from "expo-file-system";
-// import useBackHandler from "../../hook/useBackHandler";
 
 const statusData = [
 	{ name: 'Belum Kawin', id: 'unmarried', },
@@ -52,9 +40,8 @@ const CardItemList = ({ item }) => {
 };
 
 const CardHeader = ({ title, icon, route }) => {
-	// const router = useRouter();
 	return (
-		<>
+		<View>
 			<View style={styles.cardHeaderContainer}>
 				<MaterialCommunityIcons name={icon} size={36} color={COLORS.rockBlue} />
 				<Text numberOfLines={2} ellipsizeMode="tail" style={styles.cardTitle}>
@@ -62,7 +49,6 @@ const CardHeader = ({ title, icon, route }) => {
 				</Text>
 				<View style={{ flex: 1 }} />
 				<View style={{ borderRadius: SIZES.large, overflow: "hidden" }}>
-					{/* <TouchableNativeFeedback onPress={() => router.push('/resume/' + route + '?reviewResume=true')}> */}
 					<View style={{ padding: SIZES.small / 2 }}>
 						<MaterialCommunityIcons
 							name="chevron-right"
@@ -70,19 +56,15 @@ const CardHeader = ({ title, icon, route }) => {
 							color={COLORS.rockBlue}
 						/>
 					</View>
-					{/* </TouchableNativeFeedback> */}
 				</View>
-				{/* <FontAwesome name="file-text" size={36} color="black" /> */}
 			</View>
 			<View style={styles.divider} />
-		</>
+		</View>
 	);
 };
 
 export default function ReviewResume(props) {
 	var base = new Base()
-	// const router = useRouter();
-	// const { editResume, refresh } = useLocalSearchParams();
 	const [informasi_01, setInformasi_01] = useState();
 	const [informasi_02, setInformasi_02] = useState();
 	const [arr_experience, setArr_experience] = useState();
@@ -102,8 +84,6 @@ export default function ReviewResume(props) {
 
 	const getResume = useFetch("GET", "resume", {}, false);
 	const postResume = useFetch("POST", "resume", {}, false);
-
-  // useBackHandler()
 
 	useEffect(() => {
 		props.route.params.editResume ? getResume.refetch() : getAsyncStorage();
@@ -131,7 +111,6 @@ export default function ReviewResume(props) {
 	}, [resumeData]);
 
 	useEffect(() => {
-		// console.log(postResume.data.data)
 		if (postResume.data.status != null) {
 			if (postResume.data.status == "success") {
 				AsyncStorage.removeItem("informasi_01");
@@ -211,8 +190,6 @@ export default function ReviewResume(props) {
 	};
 
 	const handleNext = async () => {
-		// setIsLoading(true)
-
 		var informasi_01 = await AsyncStorage.getItem("informasi_01");
 		var informasi_02 = await AsyncStorage.getItem("informasi_02");
 		var arr_experience = await AsyncStorage.getItem("arr_experience");
@@ -269,11 +246,6 @@ export default function ReviewResume(props) {
 
 	return (
 		<View style={{ flex: 1, }}>
-			{/* <Stack.Screen
-				options={{
-					header: () => null,
-				}}
-			/> */}
 			<View style={{ flexDirection: 'row', }}>
 				<Header
 					style={{ flex: 1, }}

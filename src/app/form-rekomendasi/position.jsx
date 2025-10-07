@@ -2,14 +2,10 @@ import { StyleSheet, Text, View, ScrollView, Pressable, TextInput, FlatList, Tou
 import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Header, SearchCheckboxList, SearchCheckboxList2, TextField, RadioButton } from '../../components'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
-// import { Stack, useRouter, useLocalSearchParams } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import useFetch from '../../hook/useFetch'
 
 export default function FormRekomendasiPosition(props) {
-
-  // const router = useRouter()
-  // const params = useLocalSearchParams()
   const [selected, setSelected] = useState([])
   const [arr, setArr] = useState([])
   const [page, setPage] = useState(1);
@@ -44,7 +40,6 @@ export default function FormRekomendasiPosition(props) {
     } else {
       await AsyncStorage.setItem('arr_sub_category', JSON.stringify(selected))
 			props.navigation.navigate('FormRekomendasi', {screen : 'Location', params: {}, })
-      // router.push('/form-rekomendasi/location')
     }
   }
 
@@ -64,12 +59,6 @@ export default function FormRekomendasiPosition(props) {
         apa yang{'\n'}sedang anda cari ?
       </Text>
       <View style={[styles.mainContainer, { paddingHorizontal: SIZES.small }]}>
-        {/* {isLoading ?
-          <ActivityIndicator size={'large'} style={{ marginTop: SIZES.large }} color={COLORS.primary} />
-          :
-          // <SearchCheckboxList2 inputData={data.data != null ? data.data : []}  />
-          <SearchCheckboxList inputData={arr} getSelectedValue={(v) => setSelected(v)} searchType="online" onSearched={(search1) => onSearched1(search1)}/>
-        } */}
         <SearchCheckboxList inputData={arr} getSelectedValue={(v) => setSelected(v)} searchType="online" onSearched={(search1) => onSearched1(search1)}/>
       </View>
       <View style={{ padding: SIZES.medium, backgroundColor: 'white' }} >

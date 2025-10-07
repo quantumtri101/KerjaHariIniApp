@@ -12,10 +12,7 @@ import { Camera, } from 'react-native-vision-camera';
 
 import AsyncStorage, { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import useFetch from "../hook/useFetch";
-import { COLORS } from "../constants";
 import Base from "../utils/base";
-// import notifee, { EventType } from "@notifee/react-native";
-import messaging from "@react-native-firebase/messaging";
 
 export default function SplashScreen(props) {
 	var base = new Base()
@@ -27,9 +24,7 @@ export default function SplashScreen(props) {
 	}, [])
 
 	useEffect(() => {
-		
 		if(getProfile.data.status != null){
-			
 			if(getProfile.data.status == 'success'){
 				setUserData(getProfile.data.data)
 			}
@@ -67,11 +62,6 @@ export default function SplashScreen(props) {
 
 	function onNextAction(){
 		setTimeout(async () => {
-			// await AsyncStorage.removeItem("lastRequirementPage")
-			// await AsyncStorage.removeItem("lastResumePage")
-			// await AsyncStorage.removeItem("arr_skill")
-			// AsyncStorage.setItem('lastResumePage', 'KTP')
-
 			const token = await AsyncStorage.getItem("token");
 			const tempToken = await AsyncStorage.getItem("tempToken");
 			const isRequirementFinish = await AsyncStorage.getItem("isRequirementFinish");

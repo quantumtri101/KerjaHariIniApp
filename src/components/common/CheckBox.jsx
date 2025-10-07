@@ -1,15 +1,11 @@
 import { Text, StyleSheet, View, TouchableOpacity, Pressable } from 'react-native'
 import React, { Component, useState } from 'react'
-// import Icon from '@expo/vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { COLORS, FONTSTYLES, SIZES } from '../../constants';
 
 const CheckBox = ({ containerStyle, label, required, data, text, textStyle, onPress }) => {
   const [userOption, setUserOption] = useState(false);
-  // props.isSelected ? setSelectedJob(true) : null
-  // const label = props.label
-
-  // console.log(props.item.value)
+  
   data = data
   return (
     <View style={[containerStyle, { marginBottom: SIZES.small }]}>
@@ -57,9 +53,6 @@ const CheckBox = ({ containerStyle, label, required, data, text, textStyle, onPr
               />
               <Text
                 style={[
-                  // item.value === userOption ?
-                  //   [FONTSTYLES.p, { color: COLORS.gray_22 }]
-                  //   :
                   textStyle ? textStyle : FONTSTYLES.p
                 ]}
               >

@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableNativeFeedback, TouchableOpacity, Image } from 'react-native';
-import RNFS from 'react-native-fs';
-// import { Camera, FlashMode } from 'expo-camera';
-// import { Stack, useRouter } from 'expo-router';
 import { Header, HeaderResume, } from '../../components'
 import { SIZES, COLORS } from '../../constants';
 import useFetch from "../../hook/useFetch";
 import ModalPreloader from "../../components/common/PleaseWaitModal";
-// import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import image from '../../constants/image';
@@ -16,17 +12,12 @@ import { LocalSvg } from 'react-native-svg/css';
 import { png_frame_face, png_frame_ktp, png_frame_selfie, svg_frame_face, svg_frame_ktp } from '../../assets';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Camera, useCameraDevices, useCameraDevice, } from 'react-native-vision-camera';
-// import * as MediaLibrary from 'expo-media-library'
 
 
 export default function SelfieKTP(props) {
 	var base = new Base()
 	const { width, height } = Dimensions.get('window');
-  // const router = useRouter()
 	const device = useCameraDevice('front')
-  // const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  // const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);
-  // const [cameraType, setCameraType] = useState(Camera.Constants.Type.front);
   const [flashMode, setFlashMode] = useState(false);
   const [cameraActive, setCameraActive] = useState(true);
 	const [isModal, setIsModal] = useState(false);
@@ -90,7 +81,6 @@ export default function SelfieKTP(props) {
       props.navigation.goBack()
       props.route.params.onGoBack()
       setCameraActive(false)
-			// props.navigation.navigate('Resume', {screen : 'Review', params: {id_image: props.route.params.id_image, selfie_image: 'file://' + capturedPhoto.path,}, })
     }
 		else if(props.route.params.editResume){
 			setIsModal(true)
@@ -108,9 +98,6 @@ export default function SelfieKTP(props) {
 
   return (
     <View style={styles.container}>
-      {/* <Stack.Screen
-        options={{header: () => null}}
-      /> */}
 			<View style={{ flexDirection: 'row', }}>
         <Header backButton title={'KTP Selfie'} style={{ flex: 1, }} navigation={props.navigation}/>
 			</View>
@@ -190,7 +177,6 @@ const styles = StyleSheet.create({
   captureButton: {
     width: 60,
     height: 60,
-    // backgroundColor: 'white',
     borderRadius: 100,
     borderWidth: 3,
     borderColor: 'white',

@@ -30,11 +30,8 @@ export default function ListLamaran(props) {
     "Working",
     "Completed",
   ];
-  const preloaddata = ["", "", "", "", "", ""];
 	const [arr, setArr] = useState([])
 
-  // const router = useRouter();
-  // const { refresh } = useLocalSearchParams();
   const getApplication = useFetch("GET", "jobs/application", {});
 
   useEffect(() => {

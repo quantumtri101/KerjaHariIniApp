@@ -8,17 +8,6 @@ const useFetch = (method, endpoint, query = {}, isAutoRun = true) => {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
-	// const [tempToken, setTempToken] = useState(null);
-	// const [token, setToken] = useState(null);
-
-	const findAsyncStorageToken = async () => {
-		var getAsyncToken = await AsyncStorage.getItem("token");
-		var getAsyncTempToken = await AsyncStorage.getItem("tempToken");
-		// console.log("getAsyncToken", getAsyncToken);
-		// console.log("getAsyncTempToken", getAsyncTempToken);
-		// setToken(getAsyncToken);
-		// setTempToken(getAsyncTempToken);
-	};
 
 	const options = {
 		method: method,
@@ -27,29 +16,18 @@ const useFetch = (method, endpoint, query = {}, isAutoRun = true) => {
 			"Content-Type": "application/json", //contentType
 			Accept: "application/json", //Accept\
 			Authorization: AsyncStorage.getItem("token"),
-			// Authorization: token === null ? tempToken : token,
 		},
 		data: { ...query },
 	};
 
-	const setStaticToken = async () => {
-		await AsyncStorage.setItem("token", "Bearer 96|fAP6zrw6JLoqAXjdfK7BfUiOJUOpe5HL5i9JVZhR");
-	};
-
 	const fetchData = async () => {
-		// console.log(`${base.host}/api/${endpoint}`)
-		// console.log(await AsyncStorage.getItem("token"))
 
 		setIsLoading(true);
 		var getAsyncToken = await AsyncStorage.getItem("token");
 		var getAsyncTempToken = await AsyncStorage.getItem("tempToken");
-		// console.log(options);
 		options.headers["Authorization"] = getAsyncToken != null ? getAsyncToken : getAsyncTempToken;
 
 		try {
-			console.log(options.url)
-			console.log(options.data)
-			console.log(options.headers['Authorization'])
 
 			var response = null
 			if(options.method == "GET")
@@ -68,10 +46,7 @@ const useFetch = (method, endpoint, query = {}, isAutoRun = true) => {
 				response = await axios.post(options.url, {
 					headers: options.headers,
 				});
-			console.log(options)
 
-			// const response = await axios(options);
-			console.log(response.data)
 			setIsLoading(false);
 			setData(response.data);
 		} catch (error) {
@@ -81,8 +56,6 @@ const useFetch = (method, endpoint, query = {}, isAutoRun = true) => {
 	};
 
 	useEffect(() => {
-		// setStaticToken()
-		// findAsyncStorageToken();
 		if (method == "GET" && isAutoRun)
 			fetchData();
 	}, []);
@@ -90,7 +63,6 @@ const useFetch = (method, endpoint, query = {}, isAutoRun = true) => {
 	const refetch = async (page = null, search = null) => {
 		if (page != null) options.url += (options.url.includes("?") ? "&" : "?") + "page=" + page;
 		if (search != null) options.url += (options.url.includes("?") ? "&" : "?") + "search=" + search;
-		// options.params = body
 		await fetchData();
 	};
 
@@ -102,7 +74,6 @@ const useFetch = (method, endpoint, query = {}, isAutoRun = true) => {
 
 	const setFetchUrl = async (url) => {
 		options.url = `${base.host}/api/${url}`;
-		// await fetchData();
 	};
 
 	const setFetchBody = async (body) => {

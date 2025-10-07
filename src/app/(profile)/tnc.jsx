@@ -11,12 +11,7 @@ export default function TermCondition(props) {
 	var base = new Base()
 
   return (
-    <>
-      {/* <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-      /> */}
+    <View>
       <View style={{ backgroundColor: "white" }}>
         <Header backButton title={"Syarat dan Ketentuan"} navigation={props.navigation}/>
       </View>
@@ -24,7 +19,7 @@ export default function TermCondition(props) {
         originWhitelist={["*"]}
         source={{ uri: `${base.host}/term-condition` }}
       />
-    </>
+    </View>
   );
 }
 

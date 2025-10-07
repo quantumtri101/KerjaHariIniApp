@@ -9,9 +9,7 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-// import { Stack, useRouter, useLocalSearchParams } from "expo-router";
 import Header from "../../components/common/header/header";
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { COLORS, FONTS, FONTSTYLES, SIZES } from "../../constants";
@@ -37,20 +35,14 @@ export default function JobDetail(props) {
 	const [shiftStartDateMoment, setShiftStartDateMoment] = useState(moment());
 	const [shiftEndDateMoment, setShiftEndDateMoment] = useState(moment());
 
-  // const router = useRouter();
-  // const { from, urgent, id, userID } = useLocalSearchParams();
   const getJobs = useFetch("GET", "jobs?id=" + props.route.params.id,);
   const getJobsApplication = useFetch("GET", "jobs/application?jobs_id=" + props.route.params.id);
   const getIsRecommendation = useFetch("GET", "jobs?api_type=offering&id=" + props.route.params.id,);
   const getCity = useFetch("GET", "city?id=" + city_id, {});
   const postApproveWorker = useFetch("POST", "jobs/application/change-approve-worker", {}, false);
-  // const postDeclineWorker = useFetch("POST", "jobs/application/change-approve-worker", {}, false);
   const [modalVisible, setModalVisible] = useState(false);
 
 	useEffect(() => {
-		// getJobs.setFetchUrl("jobs?id=" + props.route.params.id)
-		// getIsRecommendation.setFetchUrl("jobs?api_type=offering&id=" + props.route.params.id)
-
 		if (props.route.params.from == "home" || props.route.params.from == "rekomendasi-semua") {
 			getIsRecommendation.fetchData();
 		}
@@ -58,7 +50,6 @@ export default function JobDetail(props) {
 
 	useEffect(() => {
 		if (getJobs.data != null) {
-			// console.log('getJobsData', getJobs.data)
 			setCity_id(getJobs.data.data?.city_id);
 
 
@@ -76,7 +67,6 @@ export default function JobDetail(props) {
           props.navigation.navigate('JobDetail', {screen: 'ApplySuccess', params: {}})
         else if(action == 'decline')
           props.navigation.replace('Home', {screen: 'ListLamaran', params: {}})
-        // router.push("job-detail/applySuccess");
       }
       else
         base.alertSnackbar(postApproveWorker.data.message)
@@ -90,7 +80,6 @@ export default function JobDetail(props) {
   const modalButton = () => {
     setModalVisible(false);
 		props.navigation.replace('Auth', {screen: 'Login', params: {}})
-    // router.push("login");
   };
 
 	function onAcceptDecline(){
@@ -101,7 +90,6 @@ export default function JobDetail(props) {
 	}
 
   const ModalCustomButton = (props) => {
-    // const router = useRouter();
     return (
       <View
         style={{
@@ -136,11 +124,6 @@ export default function JobDetail(props) {
 
   return (
     <View style={{ flex: 1, }}>
-      {/* <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-      /> */}
       <View
         style={{
           backgroundColor: "white",

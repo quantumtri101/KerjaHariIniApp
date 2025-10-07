@@ -1,11 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { COLORS, FONTS, SIZES } from "../../constants";
-// import { LocalSvg } from "react-native-svg";
-import {
-  svg_homeBannerPattern_01,
-  svg_homeBannerPattern_02,
-} from "../../assets";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import { Dimensions } from "react-native";
 import moment from "moment";
@@ -22,12 +17,9 @@ const HomeBanner = ({ data, title, bgImage, btnTitle, onPress, navigation, }) =>
   return (
     <SwiperFlatList
       data={data}
-      // ItemSeparatorComponent={() => <View style={{width: 8, backgroundColor: 'Red'}} />}
       autoplay
       autoplayDelay={4}
-      // index={2}
       autoplayLoop
-      // autoplayInvertDirection
       renderItem={({ item, index }) => (
         <Image
           key={index}
@@ -50,16 +42,6 @@ const HomeBanner = ({ data, title, bgImage, btnTitle, onPress, navigation, }) =>
       horizontal/>
   );
 };
-// <View style={styles.mainContainer}>
-//   <LocalSvg asset={svg_homeBannerPattern_01} style={styles.pattern01}/>
-//   <LocalSvg asset={svg_homeBannerPattern_02} style={styles.pattern02}/>
-//   <Text style={styles.bannerText}>Banner /{'\n'}Slider</Text>
-//   <View style={styles.buttonContainer}>
-//     <TouchableOpacity style={styles.button}>
-//       <Text style={styles.buttonText}>Get Started</Text>
-//     </TouchableOpacity>
-//   </View>
-// </View>
 
 export default HomeBanner;
 

@@ -1,9 +1,7 @@
 import { StyleSheet, Text, View, TouchableNativeFeedback } from 'react-native'
 import React, { useCallback, useState } from 'react'
-// import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import { COLORS, FONTS, FONTSTYLES, SIZES } from '../../constants'
 import { Button, Header } from '../../components'
-// import { Feather } from '@expo/vector-icons';
 import Feather from 'react-native-vector-icons/Feather';
 import { formatCurrency } from '../../utils'
 import Base from '../../utils/base'
@@ -11,8 +9,6 @@ import { useEffect } from 'react'
 
 export default function RequestPayout(props){
   var base = new Base()
-  // const router = useRouter()
-  // const {maxAmount} = useLocalSearchParams()
   const [amount, setAmount] = useState('0')
   const [buttonEnable, setButtonEnable] = useState(false)
 	const [arrNum] = useState([
@@ -36,11 +32,6 @@ export default function RequestPayout(props){
 
   return (
     <View style={{ flex: 1, }}>
-      {/* <Stack.Screen
-        options={{
-          header: () => null
-        }}
-      /> */}
       <View style={{ backgroundColor: 'white' }}>
         <Header backButton title={'Request Penarikan'} navigation={props.navigation}/>
       </View>
@@ -104,7 +95,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   inputContainer: {
-    // maxWidth: 360,
     backgroundColor: 'white'
   },
   inputButtonContainer: {
